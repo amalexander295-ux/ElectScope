@@ -21,7 +21,6 @@
             background: #eef1f5;
         }
 
-
         /* =====================================================
            MAPS TOP BAR
            ===================================================== */
@@ -73,7 +72,6 @@
             background: transparent;
 
             padding: 9px 14px;
-
             border-radius: 6px;
 
             color: #596579;
@@ -101,7 +99,6 @@
             box-shadow:
                 0 2px 8px rgba(7, 17, 31, 0.08);
         }
-
 
         /* =====================================================
            YEAR SELECTOR
@@ -133,7 +130,6 @@
             border-radius: 7px;
 
             background: #ffffff;
-
             color: #182230;
 
             font-family: inherit;
@@ -142,7 +138,6 @@
 
             cursor: pointer;
         }
-
 
         /* =====================================================
            MAIN WORKSPACE
@@ -161,10 +156,8 @@
                 320px;
 
             gap: 22px;
-
             align-items: start;
         }
-
 
         /* =====================================================
            MAP PANEL
@@ -172,7 +165,6 @@
 
         .map-panel {
             min-width: 0;
-
             overflow: hidden;
 
             background: #ffffff;
@@ -236,7 +228,6 @@
             padding: 8px 11px;
 
             background: transparent;
-
             color: #667085;
 
             font-family: inherit;
@@ -253,7 +244,6 @@
             box-shadow:
                 0 2px 6px rgba(7, 17, 31, 0.08);
         }
-
 
         /* =====================================================
            ELECTION SUMMARY
@@ -331,7 +321,6 @@
 
         .summary-majority strong {
             display: block;
-
             font-size: 15px;
         }
 
@@ -348,7 +337,6 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
 
         /* =====================================================
            MAP CANVAS
@@ -376,7 +364,6 @@
                 #ffffff;
         }
 
-
         /* =====================================================
            REAL SVG ELECTION MAP
            ===================================================== */
@@ -399,10 +386,8 @@
             height: 560px;
 
             border: 0;
-
             object-fit: contain;
         }
-
 
         /* =====================================================
            CONTROL SIDEBAR
@@ -455,7 +440,6 @@
             padding: 18px;
         }
 
-
         /* =====================================================
            SELECTED STATE
            ===================================================== */
@@ -486,7 +470,6 @@
             border-radius: 7px;
 
             background: #e3e7ed;
-
             color: #667085;
 
             font-size: 11px;
@@ -495,7 +478,6 @@
 
         .selected-state strong {
             display: block;
-
             font-size: 13px;
         }
 
@@ -508,7 +490,6 @@
 
             font-size: 10px;
         }
-
 
         /* =====================================================
            CONTROL LABELS
@@ -528,17 +509,13 @@
             text-transform: uppercase;
         }
 
-
         /* =====================================================
            PARTY BUTTONS
            ===================================================== */
 
         .party-buttons {
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 7px;
         }
 
@@ -549,7 +526,6 @@
             border-radius: 7px;
 
             background: #ffffff;
-
             color: #596579;
 
             font-family: inherit;
@@ -584,6 +560,25 @@
             color: #7a43b1;
         }
 
+        /* Visible selection state */
+
+        .party-button.democrat.active {
+            background: #0375c9;
+            border-color: #0375c9;
+            color: #ffffff;
+        }
+
+        .party-button.republican.active {
+            background: #c9062a;
+            border-color: #c9062a;
+            color: #ffffff;
+        }
+
+        .party-button.other.active {
+            background: #8c52c7;
+            border-color: #8c52c7;
+            color: #ffffff;
+        }
 
         /* =====================================================
            RATINGS
@@ -608,7 +603,6 @@
             border-radius: 6px;
 
             background: #ffffff;
-
             color: #4d596b;
 
             font-family: inherit;
@@ -627,15 +621,20 @@
             border-color: #bfc7d2;
         }
 
+        .rating-button.active {
+            background: #eef3f8;
+            border-color: #3679b9;
+            color: #182230;
+            box-shadow: inset 3px 0 0 #3679b9;
+        }
+
         .rating-dot {
             width: 9px;
             height: 9px;
 
             border-radius: 50%;
-
             background: #a8b0bc;
         }
-
 
         /* =====================================================
            MAP ACTIONS
@@ -654,7 +653,6 @@
             border-radius: 7px;
 
             background: #ffffff;
-
             color: #4f5b6d;
 
             font-family: inherit;
@@ -676,16 +674,13 @@
 
         .map-action-button.primary {
             border-color: #20314a;
-
             background: #20314a;
-
             color: #ffffff;
         }
 
         .map-action-button.primary:hover {
             background: #142238;
         }
-
 
         /* =====================================================
            LEGEND
@@ -711,7 +706,6 @@
         .legend-swatch {
             width: 14px;
             height: 14px;
-
             border-radius: 4px;
         }
 
@@ -760,11 +754,8 @@
             <div class="nav-links">
 
                 <a href="maps.html">Maps</a>
-
                 <a href="polls.html">Polls</a>
-
                 <a href="predictions.html">Predictions</a>
-
                 <a href="results.html">Results</a>
 
             </div>
@@ -946,7 +937,10 @@
 
                         <div>
 
-                            <span class="summary-label">
+                            <span
+                                class="summary-label"
+                                id="democrat-summary-label"
+                            >
                                 Democrat
                             </span>
 
@@ -961,11 +955,11 @@
 
                     <div class="summary-majority">
 
-                        <strong>
+                        <strong id="majority-number">
                             270
                         </strong>
 
-                        <span>
+                        <span id="majority-label">
                             To Win
                         </span>
 
@@ -981,7 +975,10 @@
 
                         <div>
 
-                            <span class="summary-label">
+                            <span
+                                class="summary-label"
+                                id="republican-summary-label"
+                            >
                                 Republican
                             </span>
 
@@ -1086,10 +1083,7 @@
 
                             <button
                                 type="button"
-                                class="
-                                    party-button
-                                    democrat
-                                "
+                                class="party-button democrat"
                                 data-party="democrat"
                             >
                                 DEM
@@ -1097,10 +1091,7 @@
 
                             <button
                                 type="button"
-                                class="
-                                    party-button
-                                    republican
-                                "
+                                class="party-button republican"
                                 data-party="republican"
                             >
                                 GOP
@@ -1108,10 +1099,7 @@
 
                             <button
                                 type="button"
-                                class="
-                                    party-button
-                                    other
-                                "
+                                class="party-button other"
                                 data-party="other"
                             >
                                 OTHER
@@ -1133,11 +1121,7 @@
                                 data-rating="tossup"
                             >
                                 Tossup
-
-                                <span
-                                    class="rating-dot"
-                                ></span>
-
+                                <span class="rating-dot"></span>
                             </button>
 
 
@@ -1147,11 +1131,7 @@
                                 data-rating="tilt"
                             >
                                 Tilt
-
-                                <span
-                                    class="rating-dot"
-                                ></span>
-
+                                <span class="rating-dot"></span>
                             </button>
 
 
@@ -1161,11 +1141,7 @@
                                 data-rating="lean"
                             >
                                 Lean
-
-                                <span
-                                    class="rating-dot"
-                                ></span>
-
+                                <span class="rating-dot"></span>
                             </button>
 
 
@@ -1175,11 +1151,7 @@
                                 data-rating="likely"
                             >
                                 Likely
-
-                                <span
-                                    class="rating-dot"
-                                ></span>
-
+                                <span class="rating-dot"></span>
                             </button>
 
 
@@ -1189,11 +1161,7 @@
                                 data-rating="solid"
                             >
                                 Solid
-
-                                <span
-                                    class="rating-dot"
-                                ></span>
-
+                                <span class="rating-dot"></span>
                             </button>
 
                         </div>
@@ -1228,10 +1196,8 @@
 
                             <button
                                 type="button"
-                                class="
-                                    map-action-button
-                                    primary
-                                "
+                                class="map-action-button primary"
+                                data-action="save"
                             >
                                 Save Map
                             </button>
@@ -1239,6 +1205,7 @@
                             <button
                                 type="button"
                                 class="map-action-button"
+                                data-action="share"
                             >
                                 Share
                             </button>
@@ -1246,6 +1213,7 @@
                             <button
                                 type="button"
                                 class="map-action-button"
+                                data-action="reset"
                             >
                                 Reset
                             </button>
@@ -1253,6 +1221,7 @@
                             <button
                                 type="button"
                                 class="map-action-button"
+                                data-action="clear"
                             >
                                 Clear
                             </button>
@@ -1292,10 +1261,7 @@
                             </span>
 
                             <span
-                                class="
-                                    legend-swatch
-                                    democrat
-                                "
+                                class="legend-swatch democrat"
                             ></span>
 
                         </div>
@@ -1308,10 +1274,7 @@
                             </span>
 
                             <span
-                                class="
-                                    legend-swatch
-                                    republican
-                                "
+                                class="legend-swatch republican"
                             ></span>
 
                         </div>
@@ -1324,10 +1287,7 @@
                             </span>
 
                             <span
-                                class="
-                                    legend-swatch
-                                    tossup
-                                "
+                                class="legend-swatch tossup"
                             ></span>
 
                         </div>
@@ -1340,10 +1300,7 @@
                             </span>
 
                             <span
-                                class="
-                                    legend-swatch
-                                    other
-                                "
+                                class="legend-swatch other"
                             ></span>
 
                         </div>
@@ -1361,11 +1318,16 @@
 
     <!-- =====================================================
          JAVASCRIPT
+
+         ORDER MATTERS:
+         1. Shared site JS
+         2. Election datasets
+         3. Map engine
          ===================================================== -->
 
     <script src="js/main.js"></script>
-<script src="data/elections.js"></script>
-<script src="js/maps.js"></script>
+    <script src="data/elections.js"></script>
+    <script src="js/maps.js"></script>
 
 </body>
 
