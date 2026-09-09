@@ -13,7 +13,6 @@
 
         /* =====================================================
            MAPS PAGE
-           Desktop Workspace
            ===================================================== */
 
         .maps-page {
@@ -22,7 +21,7 @@
         }
 
         /* =====================================================
-           MAPS TOP BAR
+           TOP TOOLBAR
            ===================================================== */
 
         .maps-toolbar {
@@ -81,15 +80,6 @@
             font-weight: 800;
 
             cursor: pointer;
-
-            transition:
-                background 0.2s ease,
-                color 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .election-type-button:hover {
-            color: #182230;
         }
 
         .election-type-button.active {
@@ -101,8 +91,14 @@
         }
 
         /* =====================================================
-           YEAR SELECTOR
+           TOOLBAR RIGHT
            ===================================================== */
+
+        .maps-toolbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
         .year-control {
             display: flex;
@@ -139,8 +135,45 @@
             cursor: pointer;
         }
 
+        .settings-button {
+            height: 40px;
+
+            padding: 0 14px;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            border: 1px solid #cfd5de;
+            border-radius: 7px;
+
+            background: #ffffff;
+            color: #344054;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        .settings-button:hover {
+            background: #f7f8fa;
+            border-color: #aeb7c4;
+            transform: translateY(-1px);
+        }
+
+        .settings-icon {
+            font-size: 15px;
+        }
+
         /* =====================================================
-           MAIN WORKSPACE
+           WORKSPACE
            ===================================================== */
 
         .map-workspace {
@@ -217,7 +250,6 @@
             padding: 4px;
 
             background: #f1f3f6;
-
             border-radius: 7px;
         }
 
@@ -246,7 +278,7 @@
         }
 
         /* =====================================================
-           ELECTION SUMMARY
+           SUMMARY
            ===================================================== */
 
         .map-summary {
@@ -264,7 +296,6 @@
             gap: 24px;
 
             background: #fafbfc;
-
             border-bottom: 1px solid #e1e5eb;
         }
 
@@ -339,7 +370,7 @@
         }
 
         /* =====================================================
-           MAP CANVAS
+           MAP
            ===================================================== */
 
         .map-canvas {
@@ -364,10 +395,6 @@
                 #ffffff;
         }
 
-        /* =====================================================
-           REAL SVG ELECTION MAP
-           ===================================================== */
-
         .election-map-container {
             width: 100%;
             min-height: 560px;
@@ -390,7 +417,7 @@
         }
 
         /* =====================================================
-           CONTROL SIDEBAR
+           SIDEBAR
            ===================================================== */
 
         .map-sidebar {
@@ -492,7 +519,7 @@
         }
 
         /* =====================================================
-           CONTROL LABELS
+           CONTROLS
            ===================================================== */
 
         .control-label {
@@ -509,10 +536,6 @@
             text-transform: uppercase;
         }
 
-        /* =====================================================
-           PARTY BUTTONS
-           ===================================================== */
-
         .party-buttons {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -526,23 +549,12 @@
             border-radius: 7px;
 
             background: #ffffff;
-            color: #596579;
 
             font-family: inherit;
             font-size: 11px;
             font-weight: 900;
 
             cursor: pointer;
-
-            transition:
-                transform 0.15s ease,
-                border-color 0.15s ease,
-                background 0.15s ease,
-                color 0.15s ease;
-        }
-
-        .party-button:hover {
-            transform: translateY(-1px);
         }
 
         .party-button.democrat {
@@ -560,29 +572,20 @@
             color: #7a43b1;
         }
 
-        /* Visible selection state */
-
         .party-button.democrat.active {
             background: #0375c9;
-            border-color: #0375c9;
             color: #ffffff;
         }
 
         .party-button.republican.active {
             background: #c9062a;
-            border-color: #c9062a;
             color: #ffffff;
         }
 
         .party-button.other.active {
             background: #8c52c7;
-            border-color: #8c52c7;
             color: #ffffff;
         }
-
-        /* =====================================================
-           RATINGS
-           ===================================================== */
 
         .rating-buttons {
             display: grid;
@@ -610,22 +613,18 @@
             font-weight: 800;
 
             cursor: pointer;
-
-            transition:
-                background 0.15s ease,
-                border-color 0.15s ease;
         }
 
         .rating-button:hover {
             background: #f7f8fa;
-            border-color: #bfc7d2;
         }
 
         .rating-button.active {
             background: #eef3f8;
             border-color: #3679b9;
-            color: #182230;
-            box-shadow: inset 3px 0 0 #3679b9;
+
+            box-shadow:
+                inset 3px 0 0 #3679b9;
         }
 
         .rating-dot {
@@ -637,7 +636,7 @@
         }
 
         /* =====================================================
-           MAP ACTIONS
+           ACTIONS
            ===================================================== */
 
         .map-actions {
@@ -660,26 +659,12 @@
             font-weight: 900;
 
             cursor: pointer;
-
-            transition:
-                transform 0.15s ease,
-                background 0.15s ease,
-                border-color 0.15s ease;
-        }
-
-        .map-action-button:hover {
-            transform: translateY(-1px);
-            background: #f7f8fa;
         }
 
         .map-action-button.primary {
             border-color: #20314a;
             background: #20314a;
             color: #ffffff;
-        }
-
-        .map-action-button.primary:hover {
-            background: #142238;
         }
 
         /* =====================================================
@@ -706,6 +691,7 @@
         .legend-swatch {
             width: 14px;
             height: 14px;
+
             border-radius: 4px;
         }
 
@@ -723,6 +709,330 @@
 
         .legend-swatch.other {
             background: #8c52c7;
+        }
+
+        /* =====================================================
+           SETTINGS MODAL
+           ===================================================== */
+
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+                rgba(7, 17, 31, 0.62);
+
+            backdrop-filter: blur(4px);
+        }
+
+        .settings-overlay.open {
+            display: flex;
+        }
+
+        .settings-modal {
+            width: min(860px, 100%);
+            max-height: 88vh;
+
+            overflow: hidden;
+
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+
+            background: #ffffff;
+
+            border: 1px solid #d8dde5;
+            border-radius: 15px;
+
+            box-shadow:
+                0 28px 80px rgba(7, 17, 31, 0.28);
+        }
+
+        .settings-modal-header {
+            padding: 20px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .settings-modal-heading span {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #3679b9;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .settings-modal-heading h2 {
+            color: #182230;
+
+            font-size: 21px;
+            letter-spacing: -0.4px;
+        }
+
+        .settings-close {
+            width: 36px;
+            height: 36px;
+
+            border: 1px solid #d8dde5;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #596579;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .settings-modal-body {
+            min-height: 0;
+
+            display: grid;
+
+            grid-template-columns:
+                190px
+                minmax(0, 1fr);
+        }
+
+        .settings-nav {
+            padding: 16px;
+
+            background: #f6f8fa;
+
+            border-right: 1px solid #e1e5eb;
+        }
+
+        .settings-nav-button {
+            width: 100%;
+
+            margin-bottom: 6px;
+            padding: 11px 12px;
+
+            border: 0;
+            border-radius: 7px;
+
+            background: transparent;
+            color: #596579;
+
+            text-align: left;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 850;
+
+            cursor: pointer;
+        }
+
+        .settings-nav-button.active {
+            background: #ffffff;
+            color: #182230;
+
+            box-shadow:
+                0 2px 8px rgba(7, 17, 31, 0.07);
+        }
+
+        .settings-content {
+            padding: 24px;
+
+            overflow-y: auto;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 5px;
+
+            color: #182230;
+
+            font-size: 18px;
+        }
+
+        .settings-description {
+            margin-bottom: 22px;
+
+            color: #7a8596;
+
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .settings-field {
+            margin-bottom: 18px;
+        }
+
+        .settings-field label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #596579;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .settings-input,
+        .settings-select {
+            width: 100%;
+            height: 42px;
+
+            padding: 0 12px;
+
+            border: 1px solid #cfd5de;
+            border-radius: 7px;
+
+            background: #ffffff;
+            color: #182230;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .party-settings-card {
+            margin-bottom: 14px;
+            padding: 16px;
+
+            border: 1px solid #dfe4eb;
+            border-radius: 9px;
+
+            background: #fafbfc;
+        }
+
+        .party-settings-card h4 {
+            margin-bottom: 14px;
+
+            font-size: 13px;
+        }
+
+        .party-settings-card.democrat-card {
+            border-left: 4px solid #0375c9;
+        }
+
+        .party-settings-card.republican-card {
+            border-left: 4px solid #c9062a;
+        }
+
+        .settings-note {
+            padding: 12px 14px;
+
+            border: 1px solid #dce5ee;
+            border-radius: 8px;
+
+            background: #f5f8fb;
+            color: #667085;
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .settings-toggle-row {
+            min-height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom: 1px solid #edf0f3;
+        }
+
+        .settings-toggle-row strong {
+            display: block;
+
+            color: #344054;
+
+            font-size: 11px;
+        }
+
+        .settings-toggle-row span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: #8a94a3;
+
+            font-size: 9px;
+        }
+
+        .settings-toggle-row input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .settings-modal-footer {
+            padding: 15px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            border-top: 1px solid #e1e5eb;
+
+            background: #fafbfc;
+        }
+
+        .settings-footer-right {
+            display: flex;
+            gap: 8px;
+        }
+
+        .settings-footer-button {
+            min-height: 39px;
+
+            padding: 0 15px;
+
+            border: 1px solid #cfd5de;
+            border-radius: 7px;
+
+            background: #ffffff;
+            color: #4f5b6d;
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .settings-footer-button.primary {
+            border-color: #20314a;
+            background: #20314a;
+            color: #ffffff;
         }
 
     </style>
@@ -750,7 +1060,6 @@
 
             </a>
 
-
             <div class="nav-links">
 
                 <a href="maps.html">Maps</a>
@@ -759,7 +1068,6 @@
                 <a href="results.html">Results</a>
 
             </div>
-
 
             <div class="nav-account">
 
@@ -782,7 +1090,7 @@
 
 
         <!-- =================================================
-             MAP TOOLBAR
+             TOOLBAR
              ================================================= -->
 
         <section class="maps-toolbar">
@@ -794,7 +1102,6 @@
                     <h1 class="maps-page-title">
                         Election Maps
                     </h1>
-
 
                     <div class="election-type-tabs">
 
@@ -835,35 +1142,44 @@
                 </div>
 
 
-                <div class="year-control">
+                <div class="maps-toolbar-actions">
 
-                    <label for="election-year">
-                        Year
-                    </label>
+                    <div class="year-control">
 
-                    <select id="election-year">
+                        <label for="election-year">
+                            Year
+                        </label>
 
-                        <option value="2028" selected>
-                            2028
-                        </option>
+                        <select id="election-year">
 
-                        <option value="2026">
-                            2026
-                        </option>
+                            <option value="2028" selected>
+                                2028
+                            </option>
 
-                        <option value="2024">
-                            2024
-                        </option>
+                            <option value="2024">
+                                2024
+                            </option>
 
-                        <option value="2022">
-                            2022
-                        </option>
+                            <option value="2020">
+                                2020
+                            </option>
 
-                        <option value="2020">
-                            2020
-                        </option>
+                        </select>
 
-                    </select>
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="settings-button"
+                        id="open-map-settings"
+                    >
+                        <span class="settings-icon">
+                            ⚙
+                        </span>
+
+                        Settings
+                    </button>
 
                 </div>
 
@@ -878,13 +1194,7 @@
 
         <section class="map-workspace">
 
-
-            <!-- =============================================
-                 MAP AREA
-                 ============================================= -->
-
             <div class="map-panel">
-
 
                 <div class="map-panel-header">
 
@@ -998,7 +1308,7 @@
 
 
                 <!-- =========================================
-                     REAL SVG MAP
+                     SVG MAP
                      ========================================= -->
 
                 <div class="map-canvas">
@@ -1027,11 +1337,6 @@
                  ============================================= -->
 
             <aside class="map-sidebar">
-
-
-                <!-- =========================================
-                     SELECTED RACE
-                     ========================================= -->
 
                 <section class="control-card">
 
@@ -1085,6 +1390,7 @@
                                 type="button"
                                 class="party-button democrat"
                                 data-party="democrat"
+                                id="democrat-party-button"
                             >
                                 DEM
                             </button>
@@ -1093,6 +1399,7 @@
                                 type="button"
                                 class="party-button republican"
                                 data-party="republican"
+                                id="republican-party-button"
                             >
                                 GOP
                             </button>
@@ -1124,7 +1431,6 @@
                                 <span class="rating-dot"></span>
                             </button>
 
-
                             <button
                                 type="button"
                                 class="rating-button"
@@ -1133,7 +1439,6 @@
                                 Tilt
                                 <span class="rating-dot"></span>
                             </button>
-
 
                             <button
                                 type="button"
@@ -1144,7 +1449,6 @@
                                 <span class="rating-dot"></span>
                             </button>
 
-
                             <button
                                 type="button"
                                 class="rating-button"
@@ -1153,7 +1457,6 @@
                                 Likely
                                 <span class="rating-dot"></span>
                             </button>
-
 
                             <button
                                 type="button"
@@ -1172,7 +1475,7 @@
 
 
                 <!-- =========================================
-                     MAP ACTIONS
+                     ACTIONS
                      ========================================= -->
 
                 <section class="control-card">
@@ -1256,7 +1559,7 @@
 
                         <div class="legend-row">
 
-                            <span>
+                            <span id="democrat-legend-label">
                                 Democratic
                             </span>
 
@@ -1269,7 +1572,7 @@
 
                         <div class="legend-row">
 
-                            <span>
+                            <span id="republican-legend-label">
                                 Republican
                             </span>
 
@@ -1317,17 +1620,708 @@
 
 
     <!-- =====================================================
-         JAVASCRIPT
+         MAP SETTINGS MODAL
+         ===================================================== -->
 
-         ORDER MATTERS:
-         1. Shared site JS
-         2. Election datasets
-         3. Map engine
+    <div
+        class="settings-overlay"
+        id="map-settings-overlay"
+        aria-hidden="true"
+    >
+
+        <div
+            class="settings-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="map-settings-title"
+        >
+
+            <div class="settings-modal-header">
+
+                <div class="settings-modal-heading">
+
+                    <span>
+                        ElectScope
+                    </span>
+
+                    <h2 id="map-settings-title">
+                        Map Settings
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="settings-close"
+                    id="close-map-settings"
+                    aria-label="Close map settings"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="settings-modal-body">
+
+
+                <!-- SETTINGS NAVIGATION -->
+
+                <nav class="settings-nav">
+
+                    <button
+                        type="button"
+                        class="settings-nav-button active"
+                        data-settings-tab="general"
+                    >
+                        General
+                    </button>
+
+                    <button
+                        type="button"
+                        class="settings-nav-button"
+                        data-settings-tab="candidates"
+                    >
+                        Candidates & Parties
+                    </button>
+
+                    <button
+                        type="button"
+                        class="settings-nav-button"
+                        data-settings-tab="electoral-votes"
+                    >
+                        Electoral Votes
+                    </button>
+
+                    <button
+                        type="button"
+                        class="settings-nav-button"
+                        data-settings-tab="display"
+                    >
+                        Display
+                    </button>
+
+                </nav>
+
+
+                <!-- SETTINGS CONTENT -->
+
+                <div class="settings-content">
+
+
+                    <!-- GENERAL -->
+
+                    <section
+                        class="settings-section active"
+                        data-settings-section="general"
+                    >
+
+                        <h3>
+                            General
+                        </h3>
+
+                        <p class="settings-description">
+                            Configure the basic information for this election map.
+                        </p>
+
+
+                        <div class="settings-field">
+
+                            <label for="settings-map-title">
+                                Map Title
+                            </label>
+
+                            <input
+                                type="text"
+                                class="settings-input"
+                                id="settings-map-title"
+                                value="2028 Presidential Map"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-grid">
+
+                            <div class="settings-field">
+
+                                <label for="settings-election-year">
+                                    Election Year
+                                </label>
+
+                                <select
+                                    class="settings-select"
+                                    id="settings-election-year"
+                                >
+
+                                    <option value="2028">
+                                        2028
+                                    </option>
+
+                                    <option value="2024">
+                                        2024
+                                    </option>
+
+                                    <option value="2020">
+                                        2020
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label>
+                                    Election Type
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="settings-input"
+                                    value="President"
+                                    disabled
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CANDIDATES -->
+
+                    <section
+                        class="settings-section"
+                        data-settings-section="candidates"
+                    >
+
+                        <h3>
+                            Candidates & Parties
+                        </h3>
+
+                        <p class="settings-description">
+                            Customize the names displayed throughout your map.
+                            Party identity remains separate from candidate names
+                            so map colors remain consistent.
+                        </p>
+
+
+                        <div
+                            class="
+                                party-settings-card
+                                democrat-card
+                            "
+                        >
+
+                            <h4>
+                                Democratic Slot
+                            </h4>
+
+
+                            <div class="settings-grid">
+
+                                <div class="settings-field">
+
+                                    <label for="democrat-candidate-name">
+                                        Candidate Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="settings-input"
+                                        id="democrat-candidate-name"
+                                        placeholder="Candidate name"
+                                    >
+
+                                </div>
+
+
+                                <div class="settings-field">
+
+                                    <label for="democrat-short-name">
+                                        Short Label
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="settings-input"
+                                        id="democrat-short-name"
+                                        value="DEM"
+                                        maxlength="12"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label for="democrat-party-name">
+                                    Party Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="settings-input"
+                                    id="democrat-party-name"
+                                    value="Democratic"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                party-settings-card
+                                republican-card
+                            "
+                        >
+
+                            <h4>
+                                Republican Slot
+                            </h4>
+
+
+                            <div class="settings-grid">
+
+                                <div class="settings-field">
+
+                                    <label for="republican-candidate-name">
+                                        Candidate Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="settings-input"
+                                        id="republican-candidate-name"
+                                        placeholder="Candidate name"
+                                    >
+
+                                </div>
+
+
+                                <div class="settings-field">
+
+                                    <label for="republican-short-name">
+                                        Short Label
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="settings-input"
+                                        id="republican-short-name"
+                                        value="GOP"
+                                        maxlength="12"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label for="republican-party-name">
+                                    Party Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="settings-input"
+                                    id="republican-party-name"
+                                    value="Republican"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ELECTORAL VOTES -->
+
+                    <section
+                        class="settings-section"
+                        data-settings-section="electoral-votes"
+                    >
+
+                        <h3>
+                            Electoral Votes
+                        </h3>
+
+                        <p class="settings-description">
+                            Official electoral-vote values are loaded from the
+                            selected election year. Custom state values will be
+                            added in the next wiring step.
+                        </p>
+
+
+                        <div class="settings-grid">
+
+                            <div class="settings-field">
+
+                                <label>
+                                    Total Electoral Votes
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="settings-input"
+                                    id="settings-total-ev"
+                                    value="538"
+                                    disabled
+                                >
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label>
+                                    Majority Needed
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="settings-input"
+                                    id="settings-majority"
+                                    value="270"
+                                    disabled
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-note">
+                            ElectScope will calculate the majority automatically
+                            from the total electoral votes. Custom allocations
+                            will remain separate from official historical data.
+                        </div>
+
+                    </section>
+
+
+                    <!-- DISPLAY -->
+
+                    <section
+                        class="settings-section"
+                        data-settings-section="display"
+                    >
+
+                        <h3>
+                            Display
+                        </h3>
+
+                        <p class="settings-description">
+                            Choose which information appears on the election map.
+                        </p>
+
+
+                        <label class="settings-toggle-row">
+
+                            <div>
+
+                                <strong>
+                                    State Labels
+                                </strong>
+
+                                <span>
+                                    Show state abbreviations.
+                                </span>
+
+                            </div>
+
+                            <input
+                                type="checkbox"
+                                id="display-state-labels"
+                                checked
+                            >
+
+                        </label>
+
+
+                        <label class="settings-toggle-row">
+
+                            <div>
+
+                                <strong>
+                                    Electoral Vote Numbers
+                                </strong>
+
+                                <span>
+                                    Show each state's electoral votes.
+                                </span>
+
+                            </div>
+
+                            <input
+                                type="checkbox"
+                                id="display-ev-numbers"
+                                checked
+                            >
+
+                        </label>
+
+
+                        <label class="settings-toggle-row">
+
+                            <div>
+
+                                <strong>
+                                    Rating Distribution
+                                </strong>
+
+                                <span>
+                                    Show the rating distribution bar below the map.
+                                </span>
+
+                            </div>
+
+                            <input
+                                type="checkbox"
+                                id="display-rating-bar"
+                                checked
+                            >
+
+                        </label>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS FOOTER -->
+
+            <div class="settings-modal-footer">
+
+                <button
+                    type="button"
+                    class="settings-footer-button"
+                    id="restore-default-settings"
+                >
+                    Restore Defaults
+                </button>
+
+
+                <div class="settings-footer-right">
+
+                    <button
+                        type="button"
+                        class="settings-footer-button"
+                        id="cancel-map-settings"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="button"
+                        class="
+                            settings-footer-button
+                            primary
+                        "
+                        id="apply-map-settings"
+                    >
+                        Apply Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
          ===================================================== -->
 
     <script src="js/main.js"></script>
     <script src="data/elections.js"></script>
     <script src="js/maps.js"></script>
+
+
+    <!-- =====================================================
+         SETTINGS INTERFACE
+         Temporary UI controller.
+         Map-setting behavior gets moved into maps.js next.
+         ===================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const overlay =
+                    document.getElementById(
+                        "map-settings-overlay"
+                    );
+
+                const openButton =
+                    document.getElementById(
+                        "open-map-settings"
+                    );
+
+                const closeButton =
+                    document.getElementById(
+                        "close-map-settings"
+                    );
+
+                const cancelButton =
+                    document.getElementById(
+                        "cancel-map-settings"
+                    );
+
+                const navButtons =
+                    document.querySelectorAll(
+                        "[data-settings-tab]"
+                    );
+
+                const sections =
+                    document.querySelectorAll(
+                        "[data-settings-section]"
+                    );
+
+
+                function openSettings() {
+
+                    overlay.classList.add("open");
+
+                    overlay.setAttribute(
+                        "aria-hidden",
+                        "false"
+                    );
+
+                }
+
+
+                function closeSettings() {
+
+                    overlay.classList.remove("open");
+
+                    overlay.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                }
+
+
+                openButton.addEventListener(
+                    "click",
+                    openSettings
+                );
+
+
+                closeButton.addEventListener(
+                    "click",
+                    closeSettings
+                );
+
+
+                cancelButton.addEventListener(
+                    "click",
+                    closeSettings
+                );
+
+
+                overlay.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (event.target === overlay) {
+
+                            closeSettings();
+
+                        }
+
+                    }
+                );
+
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape" &&
+                            overlay.classList.contains(
+                                "open"
+                            )
+                        ) {
+
+                            closeSettings();
+
+                        }
+
+                    }
+                );
+
+
+                navButtons.forEach(
+                    function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const tab =
+                                    button.dataset
+                                        .settingsTab;
+
+
+                                navButtons.forEach(
+                                    function (item) {
+
+                                        item.classList
+                                            .toggle(
+                                                "active",
+                                                item ===
+                                                button
+                                            );
+
+                                    }
+                                );
+
+
+                                sections.forEach(
+                                    function (section) {
+
+                                        section.classList
+                                            .toggle(
+                                                "active",
+                                                section.dataset
+                                                    .settingsSection ===
+                                                tab
+                                            );
+
+                                    }
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
 
 </body>
 
