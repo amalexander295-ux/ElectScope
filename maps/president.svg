@@ -1,1 +1,955 @@
-placeholder
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="electscope-president-map"
+    viewBox="0 0 1200 760"
+    role="img"
+    aria-labelledby="map-title map-description"
+>
+
+    <title id="map-title">
+        United States Presidential Election Map
+    </title>
+
+    <desc id="map-description">
+        Interactive presidential election map for ElectScope.
+    </desc>
+
+
+    <!-- =====================================================
+         MAP DEFINITIONS
+         ===================================================== -->
+
+    <defs>
+
+        <filter
+            id="state-shadow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+        >
+
+            <feDropShadow
+                dx="0"
+                dy="2"
+                stdDeviation="2"
+                flood-opacity="0.12"
+            />
+
+        </filter>
+
+    </defs>
+
+
+    <!-- =====================================================
+         MAP BACKGROUND
+         ===================================================== -->
+
+    <rect
+        x="0"
+        y="0"
+        width="1200"
+        height="760"
+        rx="18"
+        fill="#ffffff"
+    />
+
+
+    <!-- =====================================================
+         MAP TITLE
+         ===================================================== -->
+
+    <g id="map-heading">
+
+        <text
+            x="55"
+            y="58"
+            fill="#182230"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="22"
+            font-weight="700"
+        >
+            Electoral College
+        </text>
+
+        <text
+            x="55"
+            y="82"
+            fill="#7a8596"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="12"
+            font-weight="600"
+        >
+            Select a state to edit your map
+        </text>
+
+    </g>
+
+
+    <!-- =====================================================
+         CONTIGUOUS UNITED STATES
+
+         Real geographic state paths will be inserted into
+         this group.
+
+         Each state will use this structure:
+
+         <g
+             id="state-TX"
+             class="state-group"
+             data-state="Texas"
+             data-abbreviation="TX"
+         >
+
+             <path
+                 class="state-shape"
+                 d="..."
+             />
+
+             <text class="state-label">
+                 TX
+             </text>
+
+             <text class="ev-label">
+                 40
+             </text>
+
+         </g>
+
+         Electoral votes are supplied by JavaScript rather
+         than permanently encoded into the geography.
+         ===================================================== -->
+
+    <g
+        id="continental-states"
+        transform="translate(40 110)"
+    >
+
+        <!-- Accurate state paths go here next. -->
+
+    </g>
+
+
+    <!-- =====================================================
+         ALASKA INSET
+
+         No surrounding rectangle.
+         ===================================================== -->
+
+    <g
+        id="state-AK"
+        class="state-group inset-state"
+        data-state="Alaska"
+        data-abbreviation="AK"
+        transform="translate(80 560)"
+    >
+
+        <path
+            class="state-shape placeholder-state"
+            d="
+                M 10 70
+                L 35 40
+                L 70 28
+                L 105 8
+                L 132 24
+                L 118 48
+                L 142 61
+                L 112 72
+                L 83 64
+                L 60 83
+                L 30 78
+                Z
+            "
+        />
+
+        <text
+            class="state-label"
+            x="75"
+            y="52"
+            text-anchor="middle"
+        >
+            AK
+        </text>
+
+        <text
+            class="ev-label"
+            x="75"
+            y="67"
+            text-anchor="middle"
+        >
+            3
+        </text>
+
+    </g>
+
+
+    <!-- =====================================================
+         HAWAII INSET
+
+         No giant surrounding rectangle.
+         ===================================================== -->
+
+    <g
+        id="state-HI"
+        class="state-group inset-state"
+        data-state="Hawaii"
+        data-abbreviation="HI"
+        transform="translate(275 620)"
+    >
+
+        <g class="hawaii-islands">
+
+            <ellipse
+                class="state-shape"
+                cx="8"
+                cy="15"
+                rx="7"
+                ry="4"
+            />
+
+            <ellipse
+                class="state-shape"
+                cx="28"
+                cy="22"
+                rx="8"
+                ry="5"
+            />
+
+            <ellipse
+                class="state-shape"
+                cx="50"
+                cy="29"
+                rx="9"
+                ry="5"
+            />
+
+            <ellipse
+                class="state-shape"
+                cx="76"
+                cy="38"
+                rx="12"
+                ry="7"
+            />
+
+        </g>
+
+        <text
+            class="state-label"
+            x="38"
+            y="67"
+            text-anchor="middle"
+        >
+            HI
+        </text>
+
+        <text
+            class="ev-label"
+            x="38"
+            y="82"
+            text-anchor="middle"
+        >
+            4
+        </text>
+
+    </g>
+
+
+    <!-- =====================================================
+         DISTRICT OF COLUMBIA
+         ===================================================== -->
+
+    <g
+        id="state-DC"
+        class="state-group callout-state"
+        data-state="District of Columbia"
+        data-abbreviation="DC"
+    >
+
+        <line
+            class="callout-line"
+            x1="885"
+            y1="410"
+            x2="1030"
+            y2="470"
+        />
+
+        <rect
+            class="state-shape callout-box"
+            x="1030"
+            y="449"
+            width="74"
+            height="44"
+            rx="7"
+        />
+
+        <text
+            class="state-label"
+            x="1067"
+            y="468"
+            text-anchor="middle"
+        >
+            DC
+        </text>
+
+        <text
+            class="ev-label"
+            x="1067"
+            y="483"
+            text-anchor="middle"
+        >
+            3
+        </text>
+
+    </g>
+
+
+    <!-- =====================================================
+         NORTHEAST CALLOUT AREA
+
+         Tiny northeastern states can use these positions
+         instead of microscopic labels inside the geography.
+         ===================================================== -->
+
+    <g id="northeast-callouts">
+
+        <g
+            id="callout-VT"
+            class="state-callout"
+            data-for-state="VT"
+        >
+
+            <rect
+                x="1030"
+                y="120"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1067"
+                y="138"
+                text-anchor="middle"
+            >
+                VT
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1067"
+                y="153"
+                text-anchor="middle"
+            >
+                3
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-NH"
+            class="state-callout"
+            data-for-state="NH"
+        >
+
+            <rect
+                x="1114"
+                y="120"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1151"
+                y="138"
+                text-anchor="middle"
+            >
+                NH
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1151"
+                y="153"
+                text-anchor="middle"
+            >
+                4
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-MA"
+            class="state-callout"
+            data-for-state="MA"
+        >
+
+            <rect
+                x="1030"
+                y="172"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1067"
+                y="190"
+                text-anchor="middle"
+            >
+                MA
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1067"
+                y="205"
+                text-anchor="middle"
+            >
+                11
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-RI"
+            class="state-callout"
+            data-for-state="RI"
+        >
+
+            <rect
+                x="1114"
+                y="172"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1151"
+                y="190"
+                text-anchor="middle"
+            >
+                RI
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1151"
+                y="205"
+                text-anchor="middle"
+            >
+                4
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-CT"
+            class="state-callout"
+            data-for-state="CT"
+        >
+
+            <rect
+                x="1030"
+                y="224"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1067"
+                y="242"
+                text-anchor="middle"
+            >
+                CT
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1067"
+                y="257"
+                text-anchor="middle"
+            >
+                7
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-DE"
+            class="state-callout"
+            data-for-state="DE"
+        >
+
+            <rect
+                x="1114"
+                y="224"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1151"
+                y="242"
+                text-anchor="middle"
+            >
+                DE
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1151"
+                y="257"
+                text-anchor="middle"
+            >
+                3
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-NJ"
+            class="state-callout"
+            data-for-state="NJ"
+        >
+
+            <rect
+                x="1030"
+                y="276"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1067"
+                y="294"
+                text-anchor="middle"
+            >
+                NJ
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1067"
+                y="309"
+                text-anchor="middle"
+            >
+                14
+            </text>
+
+        </g>
+
+
+        <g
+            id="callout-MD"
+            class="state-callout"
+            data-for-state="MD"
+        >
+
+            <rect
+                x="1114"
+                y="276"
+                width="74"
+                height="42"
+                rx="7"
+            />
+
+            <text
+                x="1151"
+                y="294"
+                text-anchor="middle"
+            >
+                MD
+            </text>
+
+            <text
+                class="callout-ev"
+                x="1151"
+                y="309"
+                text-anchor="middle"
+            >
+                10
+            </text>
+
+        </g>
+
+    </g>
+
+
+    <!-- =====================================================
+         MAINE ELECTORAL DISTRICT CONTROLS
+         ===================================================== -->
+
+    <g
+        id="maine-electoral-districts"
+        class="district-elector-group"
+        transform="translate(915 560)"
+    >
+
+        <text
+            class="district-title"
+            x="0"
+            y="-14"
+        >
+            Maine
+        </text>
+
+
+        <g
+            id="ME-AL"
+            class="district-elector"
+            data-state="ME"
+            data-electoral-votes="2"
+        >
+
+            <rect
+                x="0"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="36"
+                y="24"
+                text-anchor="middle"
+            >
+                ME-AL
+            </text>
+
+        </g>
+
+
+        <g
+            id="ME-01"
+            class="district-elector"
+            data-state="ME"
+            data-electoral-votes="1"
+        >
+
+            <rect
+                x="80"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="116"
+                y="24"
+                text-anchor="middle"
+            >
+                ME-01
+            </text>
+
+        </g>
+
+
+        <g
+            id="ME-02"
+            class="district-elector"
+            data-state="ME"
+            data-electoral-votes="1"
+        >
+
+            <rect
+                x="160"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="196"
+                y="24"
+                text-anchor="middle"
+            >
+                ME-02
+            </text>
+
+        </g>
+
+    </g>
+
+
+    <!-- =====================================================
+         NEBRASKA ELECTORAL DISTRICT CONTROLS
+         ===================================================== -->
+
+    <g
+        id="nebraska-electoral-districts"
+        class="district-elector-group"
+        transform="translate(760 660)"
+    >
+
+        <text
+            class="district-title"
+            x="0"
+            y="-14"
+        >
+            Nebraska
+        </text>
+
+
+        <g
+            id="NE-AL"
+            class="district-elector"
+            data-state="NE"
+            data-electoral-votes="2"
+        >
+
+            <rect
+                x="0"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="36"
+                y="24"
+                text-anchor="middle"
+            >
+                NE-AL
+            </text>
+
+        </g>
+
+
+        <g
+            id="NE-01"
+            class="district-elector"
+            data-state="NE"
+            data-electoral-votes="1"
+        >
+
+            <rect
+                x="80"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="116"
+                y="24"
+                text-anchor="middle"
+            >
+                NE-01
+            </text>
+
+        </g>
+
+
+        <g
+            id="NE-02"
+            class="district-elector"
+            data-state="NE"
+            data-electoral-votes="1"
+        >
+
+            <rect
+                x="160"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="196"
+                y="24"
+                text-anchor="middle"
+            >
+                NE-02
+            </text>
+
+        </g>
+
+
+        <g
+            id="NE-03"
+            class="district-elector"
+            data-state="NE"
+            data-electoral-votes="1"
+        >
+
+            <rect
+                x="240"
+                y="0"
+                width="72"
+                height="38"
+                rx="6"
+            />
+
+            <text
+                x="276"
+                y="24"
+                text-anchor="middle"
+            >
+                NE-03
+            </text>
+
+        </g>
+
+    </g>
+
+
+    <!-- =====================================================
+         SVG STYLES
+         ===================================================== -->
+
+    <style>
+
+        .state-shape {
+            fill: #dce2e9;
+            stroke: #ffffff;
+            stroke-width: 2;
+            vector-effect: non-scaling-stroke;
+            cursor: pointer;
+            transition:
+                fill 0.18s ease,
+                opacity 0.18s ease;
+        }
+
+        .state-group:hover .state-shape {
+            fill: #c4ced9;
+        }
+
+        .state-label {
+            fill: #25334a;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            pointer-events: none;
+        }
+
+        .ev-label {
+            fill: #6c788a;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .callout-line {
+            stroke: #aeb8c5;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .callout-box {
+            stroke: #ffffff;
+            stroke-width: 2;
+        }
+
+        .state-callout {
+            cursor: pointer;
+        }
+
+        .state-callout rect {
+            fill: #dce2e9;
+            stroke: #ffffff;
+            stroke-width: 2;
+        }
+
+        .state-callout:hover rect {
+            fill: #c4ced9;
+        }
+
+        .state-callout text {
+            fill: #25334a;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            pointer-events: none;
+        }
+
+        .state-callout .callout-ev {
+            fill: #6c788a;
+            font-size: 9px;
+        }
+
+        .district-title {
+            fill: #667085;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .district-elector {
+            cursor: pointer;
+        }
+
+        .district-elector rect {
+            fill: #dce2e9;
+            stroke: #c7d0da;
+            stroke-width: 1.5;
+        }
+
+        .district-elector:hover rect {
+            fill: #c4ced9;
+        }
+
+        .district-elector text {
+            fill: #25334a;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            pointer-events: none;
+        }
+
+        .state-group.democrat .state-shape,
+        .state-callout.democrat rect,
+        .district-elector.democrat rect {
+            fill: #0375c9;
+        }
+
+        .state-group.republican .state-shape,
+        .state-callout.republican rect,
+        .district-elector.republican rect {
+            fill: #c9062a;
+        }
+
+        .state-group.independent .state-shape,
+        .state-callout.independent rect,
+        .district-elector.independent rect {
+            fill: #8c52c7;
+        }
+
+        .state-group.democrat .state-label,
+        .state-group.democrat .ev-label,
+        .state-group.republican .state-label,
+        .state-group.republican .ev-label,
+        .state-group.independent .state-label,
+        .state-group.independent .ev-label,
+        .state-callout.democrat text,
+        .state-callout.republican text,
+        .state-callout.independent text,
+        .district-elector.democrat text,
+        .district-elector.republican text,
+        .district-elector.independent text {
+            fill: #ffffff;
+        }
+
+    </style>
+
+</svg>
