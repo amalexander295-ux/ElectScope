@@ -4,61 +4,84 @@
    ========================================================= */
 
 
-/* ---------- COLORS ---------- */
+/* =========================================================
+   COLORS
+   ========================================================= */
 
 :root {
-    /* ElectScope brand */
+
+    /* ElectScope Brand */
+
     --navy-950: #07111f;
     --navy-900: #0c1829;
     --navy-800: #142238;
     --navy-700: #20314a;
 
-    /* Neutral surfaces */
+
+    /* Neutral Surfaces */
+
     --white: #ffffff;
     --off-white: #f6f7f9;
     --light-gray: #e8ebef;
     --border: #d8dde5;
 
+
     /* Text */
+
     --text-dark: #182230;
     --text-medium: #596579;
     --text-light: #f7f9fc;
 
-    /* ElectScope accent */
+
+    /* ElectScope UI Accents */
+
     --scope-blue: #3679b9;
     --scope-blue-light: #76a8d4;
     --scope-red: #b33a4b;
 
-    /* Election colors
-       These are separate from the website's UI colors.
-    */
+
+    /* Election Colors */
+
     --democrat: #0375c9;
     --republican: #c9062a;
     --independent: #8c52c7;
     --tossup: #d9d9d9;
 
-    /* Effects */
-    --shadow-small: 0 4px 14px rgba(7, 17, 31, 0.08);
-    --shadow-medium: 0 12px 32px rgba(7, 17, 31, 0.12);
 
-    /* Layout */
+    /* Shadows */
+
+    --shadow-small:
+        0 4px 14px rgba(7, 17, 31, 0.08);
+
+    --shadow-medium:
+        0 12px 32px rgba(7, 17, 31, 0.12);
+
+
+    /* Main Page Width */
+
     --page-width: 1240px;
 }
 
 
-/* ---------- RESET ---------- */
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
     box-sizing: border-box;
+
     margin: 0;
     padding: 0;
 }
+
 
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
+
     min-height: 100vh;
 
     font-family:
@@ -69,13 +92,16 @@ body {
         sans-serif;
 
     background: var(--off-white);
+
     color: var(--text-dark);
 
     line-height: 1.5;
 }
 
+
 a {
     color: inherit;
+
     text-decoration: none;
 }
 
@@ -85,10 +111,13 @@ a {
    ========================================================= */
 
 .site-header {
+
     position: relative;
+
     z-index: 100;
 
     background: var(--navy-950);
+
     color: var(--white);
 
     border-bottom: 4px solid transparent;
@@ -102,81 +131,247 @@ a {
         ) 1;
 }
 
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
 .navbar {
-    width: min(100% - 64px, var(--page-width));
+
+    width: min(
+        100% - 64px,
+        var(--page-width)
+    );
+
     min-height: 82px;
 
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
     align-items: center;
 
     gap: 30px;
 }
 
 
-/* Logo */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
+
     justify-self: start;
 
-    font-size: 26px;
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--white);
+}
+
+
+/* ElectScope Logo Symbol */
+
+.logo-mark {
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    overflow: hidden;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.85);
+
+    border-radius: 50%;
+
+    transform: rotate(-8deg);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(255, 255, 255, 0.04);
+}
+
+
+.logo-mark-blue {
+    background: var(--scope-blue);
+}
+
+
+.logo-mark-center {
+    background: #f4f4f4;
+}
+
+
+.logo-mark-red {
+    background: var(--scope-red);
+}
+
+
+/* ElectScope Wordmark */
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    line-height: 1;
+}
+
+
+.logo-text strong {
+
+    font-size: 24px;
+
     font-weight: 900;
 
     letter-spacing: -0.8px;
 }
 
 
-/* Main Navigation */
+.logo-text small {
+
+    margin-top: 5px;
+
+    color:
+        rgba(255, 255, 255, 0.52);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MAIN NAVIGATION
+   ========================================================= */
 
 .nav-links {
+
     display: flex;
+
     align-items: center;
+
+    justify-content: center;
 
     gap: 34px;
 }
 
+
 .nav-links a {
+
     position: relative;
 
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 30px 0;
+
+    color:
+        rgba(255, 255, 255, 0.82);
+
     font-size: 14px;
+
     font-weight: 700;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
 
-    color: rgba(255, 255, 255, 0.82);
+    text-transform: uppercase;
 
     transition:
         color 0.2s ease,
         transform 0.2s ease;
 }
 
+
 .nav-links a:hover {
+
     color: var(--white);
+
     transform: translateY(-1px);
 }
 
 
-/* Account */
+/* Navigation Hover Line */
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--white);
+
+    transform: translateX(-50%);
+
+    transition:
+        width 0.2s ease;
+}
+
+
+.nav-links a:hover::after {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
 
 .nav-account {
+
     justify-self: end;
 }
 
+
 .nav-account a {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     min-height: 42px;
 
     padding: 0 18px;
 
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
     border-radius: 7px;
 
     font-size: 14px;
+
     font-weight: 700;
 
     transition:
@@ -184,44 +379,59 @@ a {
         border-color 0.2s ease;
 }
 
+
 .nav-account a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.65);
+
+    background:
+        rgba(255, 255, 255, 0.1);
+
+    border-color:
+        rgba(255, 255, 255, 0.65);
 }
 
 
 /* =========================================================
-   BASIC SECTION FOUNDATION
+   BASIC PAGE FOUNDATION
    ========================================================= */
 
 main {
     width: 100%;
 }
 
+
 section {
     position: relative;
 }
 
+
 .section-heading {
+
     margin-bottom: 34px;
 }
+
 
 .section-heading > p,
 .section-label,
 .hero-label {
+
     margin-bottom: 8px;
 
     color: var(--scope-blue);
 
     font-size: 13px;
+
     font-weight: 900;
 
     letter-spacing: 1.8px;
+
     text-transform: uppercase;
 }
 
+
 .section-heading h2 {
+
     font-size: 38px;
+
     line-height: 1.1;
 
     letter-spacing: -1px;
@@ -229,30 +439,42 @@ section {
 
 
 /* =========================================================
-   HERO FOUNDATION
+   HERO
    ========================================================= */
 
 .hero {
+
     min-height: 610px;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
     align-items: center;
 
     gap: 70px;
 
     padding:
         90px
-        max(32px, calc((100vw - var(--page-width)) / 2));
+        max(
+            32px,
+            calc(
+                (100vw - var(--page-width)) / 2
+            )
+        );
 
     overflow: hidden;
 
     background:
+
         radial-gradient(
             circle at 78% 35%,
             rgba(54, 121, 185, 0.22),
             transparent 30%
         ),
+
         linear-gradient(
             135deg,
             var(--navy-950),
@@ -263,53 +485,78 @@ section {
     color: var(--text-light);
 }
 
+
 .hero-content {
+
     position: relative;
+
     z-index: 2;
 
     max-width: 650px;
 }
 
+
 .hero-label {
+
     color: var(--scope-blue-light);
 }
 
+
 .hero h1 {
+
     max-width: 700px;
 
     margin-bottom: 24px;
 
-    font-size: clamp(54px, 5vw, 76px);
+    font-size:
+        clamp(
+            54px,
+            5vw,
+            76px
+        );
+
     line-height: 0.98;
 
     letter-spacing: -3px;
 }
 
+
 .hero-description {
+
     max-width: 590px;
 
     margin-bottom: 34px;
 
-    color: rgba(255, 255, 255, 0.72);
+    color:
+        rgba(255, 255, 255, 0.72);
 
     font-size: 19px;
+
     line-height: 1.7;
 }
 
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
 .hero-buttons {
+
     display: flex;
+
     align-items: center;
 
     gap: 14px;
 }
 
 
-/* Buttons */
-
 .primary-button,
 .secondary-button {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     min-height: 50px;
@@ -319,6 +566,7 @@ section {
     border-radius: 7px;
 
     font-size: 14px;
+
     font-weight: 800;
 
     transition:
@@ -327,43 +575,69 @@ section {
         box-shadow 0.2s ease;
 }
 
+
 .primary-button {
+
     background: var(--scope-red);
+
     color: var(--white);
 
-    box-shadow: 0 8px 24px rgba(179, 58, 75, 0.25);
+    box-shadow:
+        0 8px 24px
+        rgba(179, 58, 75, 0.25);
 }
+
 
 .primary-button:hover {
-    transform: translateY(-2px);
 
-    box-shadow: 0 12px 28px rgba(179, 58, 75, 0.34);
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(179, 58, 75, 0.34);
 }
 
+
 .secondary-button {
-    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
 
     color: var(--white);
 
-    background: rgba(255, 255, 255, 0.05);
+    background:
+        rgba(255, 255, 255, 0.05);
 }
+
 
 .secondary-button:hover {
-    transform: translateY(-2px);
 
-    background: rgba(255, 255, 255, 0.1);
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255, 255, 255, 0.1);
 }
 
 
-/* Empty visual area for now */
+/* =========================================================
+   HERO VISUAL PLACEHOLDER
+   ========================================================= */
 
 .hero-visual {
+
     min-height: 400px;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
     border-radius: 18px;
 
     background:
+
         linear-gradient(
             145deg,
             rgba(255, 255, 255, 0.06),
@@ -373,128 +647,188 @@ section {
 
 
 /* =========================================================
-   ELECTION CENTER FOUNDATION
+   ELECTION CENTER
    ========================================================= */
 
 .election-center {
-    width: min(100% - 64px, var(--page-width));
+
+    width:
+        min(
+            100% - 64px,
+            var(--page-width)
+        );
 
     margin: 0 auto;
 
     padding: 90px 0;
 }
 
+
 .election-grid {
+
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 20px;
 }
 
+
+/* Election Cards */
+
 .election-card {
+
     min-height: 250px;
 
     padding: 28px;
 
     display: flex;
+
     flex-direction: column;
 
     background: var(--white);
 
-    border: 1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
+
     border-radius: 12px;
 
-    box-shadow: var(--shadow-small);
+    box-shadow:
+        var(--shadow-small);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
-.election-card:hover {
-    transform: translateY(-4px);
 
-    box-shadow: var(--shadow-medium);
+.election-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        var(--shadow-medium);
 }
 
+
 .election-card h3 {
+
     margin-bottom: 14px;
 
     font-size: 23px;
 }
 
+
 .election-card p {
+
     color: var(--text-medium);
 
     line-height: 1.65;
 }
 
+
 .election-card a {
+
     margin-top: auto;
+
     padding-top: 24px;
 
     color: var(--scope-blue);
 
     font-size: 14px;
+
     font-weight: 800;
 }
 
 
 /* =========================================================
-   ELECTION DESK FOUNDATION
+   ELECTION DESK
    ========================================================= */
 
 .election-desk {
-    padding: 90px
-        max(32px, calc((100vw - var(--page-width)) / 2));
+
+    padding:
+        90px
+        max(
+            32px,
+            calc(
+                (100vw - var(--page-width)) / 2
+            )
+        );
 
     background: var(--white);
 
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top:
+        1px solid
+        var(--border);
+
+    border-bottom:
+        1px solid
+        var(--border);
 }
 
+
 .desk-grid {
+
     display: grid;
 
-    grid-template-columns: 0.9fr 1.4fr;
+    grid-template-columns:
+        0.9fr
+        1.4fr;
 
     gap: 24px;
 }
 
+
+/* Election Desk Cards */
+
 .polling-preview,
 .featured-map {
+
     min-height: 330px;
 
     padding: 30px;
 
     display: flex;
+
     flex-direction: column;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
+
     border-radius: 12px;
 
     background: var(--off-white);
 }
 
+
 .polling-preview h3,
 .featured-map h3 {
+
     margin-bottom: 20px;
 
     font-size: 23px;
 }
 
+
 .polling-content,
 .featured-map-content {
+
     flex: 1;
 }
 
+
 .polling-preview > a,
 .featured-map > a {
+
     color: var(--scope-blue);
 
     font-size: 14px;
+
     font-weight: 800;
 }
 
@@ -504,35 +838,49 @@ section {
    ========================================================= */
 
 .prediction-cta {
-    padding: 100px 32px;
+
+    padding:
+        100px
+        32px;
 
     text-align: center;
 
     background: var(--navy-900);
+
     color: var(--white);
 }
 
+
 .prediction-content {
+
     max-width: 760px;
 
     margin: 0 auto;
 }
 
+
 .prediction-content h2 {
+
     margin-bottom: 18px;
 
     font-size: 44px;
+
     line-height: 1.1;
 
     letter-spacing: -1.5px;
 }
 
-.prediction-content > p:not(.section-label) {
+
+.prediction-content
+> p:not(.section-label) {
+
     margin-bottom: 30px;
 
-    color: rgba(255, 255, 255, 0.7);
+    color:
+        rgba(255, 255, 255, 0.7);
 
     font-size: 18px;
+
     line-height: 1.7;
 }
 
@@ -542,23 +890,38 @@ section {
    ========================================================= */
 
 .site-footer {
+
     width: 100%;
 
-    padding: 46px
-        max(32px, calc((100vw - var(--page-width)) / 2));
+    padding:
+        46px
+        max(
+            32px,
+            calc(
+                (100vw - var(--page-width)) / 2
+            )
+        );
 
     display: grid;
 
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
     align-items: center;
 
     gap: 30px;
 
     background: var(--navy-950);
-    color: rgba(255, 255, 255, 0.65);
+
+    color:
+        rgba(255, 255, 255, 0.65);
 }
 
+
 .footer-brand strong {
+
     display: block;
 
     margin-bottom: 3px;
@@ -568,24 +931,33 @@ section {
     font-size: 21px;
 }
 
+
 .footer-brand p {
+
     font-size: 13px;
 }
 
+
 .footer-links {
+
     display: flex;
 
     gap: 26px;
 
     font-size: 13px;
+
     font-weight: 700;
 }
 
+
 .footer-links a:hover {
+
     color: var(--white);
 }
 
+
 .copyright {
+
     justify-self: end;
 
     font-size: 12px;
