@@ -1,1 +1,1376 @@
-ElectScope Maps
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maps | ElectScope</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           MAPS PAGE
+           Desktop Workspace
+           ===================================================== */
+
+        .maps-page {
+            min-height: calc(100vh - 86px);
+            background: #eef1f5;
+        }
+
+
+        /* =====================================================
+           MAPS TOP BAR
+           ===================================================== */
+
+        .maps-toolbar {
+            background: #ffffff;
+            border-bottom: 1px solid #d8dde5;
+        }
+
+        .maps-toolbar-inner {
+            width: min(100% - 64px, 1400px);
+            min-height: 76px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .maps-title-group {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .maps-page-title {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -0.7px;
+            color: #182230;
+        }
+
+        .election-type-tabs {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            padding: 5px;
+
+            background: #eef1f5;
+            border: 1px solid #d8dde5;
+            border-radius: 9px;
+        }
+
+        .election-type-button {
+            border: 0;
+            background: transparent;
+
+            padding: 9px 14px;
+
+            border-radius: 6px;
+
+            color: #596579;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .election-type-button:hover {
+            color: #182230;
+        }
+
+        .election-type-button.active {
+            background: #ffffff;
+            color: #182230;
+
+            box-shadow:
+                0 2px 8px rgba(7, 17, 31, 0.08);
+        }
+
+
+        /* =====================================================
+           YEAR SELECTOR
+           ===================================================== */
+
+        .year-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .year-control label {
+            color: #596579;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .year-control select {
+            min-width: 100px;
+            height: 40px;
+
+            padding: 0 34px 0 13px;
+
+            border: 1px solid #cfd5de;
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            color: #182230;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           MAIN WORKSPACE
+           ===================================================== */
+
+        .map-workspace {
+            width: min(100% - 64px, 1400px);
+            margin: 0 auto;
+
+            padding: 28px 0 50px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                320px;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           MAP PANEL
+           ===================================================== */
+
+        .map-panel {
+            min-width: 0;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 1px solid #d8dde5;
+            border-radius: 13px;
+
+            box-shadow:
+                0 8px 24px rgba(7, 17, 31, 0.07);
+        }
+
+        .map-panel-header {
+            min-height: 68px;
+
+            padding: 0 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .map-panel-title span {
+            display: block;
+
+            margin-bottom: 2px;
+
+            color: #3679b9;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .map-panel-title h1 {
+            font-size: 21px;
+            line-height: 1.15;
+            letter-spacing: -0.4px;
+        }
+
+        .map-mode {
+            display: flex;
+            gap: 5px;
+
+            padding: 4px;
+
+            background: #f1f3f6;
+
+            border-radius: 7px;
+        }
+
+        .map-mode button {
+            border: 0;
+            border-radius: 5px;
+
+            padding: 8px 11px;
+
+            background: transparent;
+
+            color: #667085;
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .map-mode button.active {
+            background: #ffffff;
+            color: #182230;
+
+            box-shadow:
+                0 2px 6px rgba(7, 17, 31, 0.08);
+        }
+
+
+        /* =====================================================
+           ELECTION SUMMARY
+           ===================================================== */
+
+        .map-summary {
+            padding: 18px 22px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto
+                1fr;
+
+            align-items: center;
+
+            gap: 24px;
+
+            background: #fafbfc;
+
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .summary-party {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .summary-party.republican-summary {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .summary-color {
+            width: 11px;
+            height: 38px;
+
+            border-radius: 999px;
+        }
+
+        .summary-color.democrat {
+            background: #0375c9;
+        }
+
+        .summary-color.republican {
+            background: #c9062a;
+        }
+
+        .summary-label {
+            display: block;
+
+            color: #667085;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .summary-party strong {
+            display: block;
+
+            color: #182230;
+
+            font-size: 25px;
+            line-height: 1;
+        }
+
+        .summary-majority {
+            text-align: center;
+        }
+
+        .summary-majority strong {
+            display: block;
+
+            font-size: 15px;
+        }
+
+        .summary-majority span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: #7b8493;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           MAP CANVAS
+           ===================================================== */
+
+        .map-canvas {
+            position: relative;
+
+            min-height: 610px;
+
+            padding: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(54, 121, 185, 0.05),
+                    transparent 48%
+                ),
+                #ffffff;
+        }
+
+        .map-placeholder {
+            width: 78%;
+            max-width: 720px;
+
+            text-align: center;
+        }
+
+        .placeholder-map-shape {
+            position: relative;
+
+            width: 100%;
+            height: 310px;
+
+            margin-bottom: 24px;
+
+            border:
+                2px dashed
+                #cbd2dc;
+
+            border-radius:
+                42% 36% 31% 38% /
+                34% 42% 35% 40%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f3f5f8,
+                    #e9edf2
+                );
+        }
+
+        .placeholder-map-shape::before {
+            content: "";
+
+            position: absolute;
+
+            width: 110px;
+            height: 70px;
+
+            left: 8%;
+            bottom: -42px;
+
+            border:
+                2px dashed
+                #cbd2dc;
+
+            border-radius: 40%;
+
+            background: #eef1f5;
+        }
+
+        .placeholder-map-shape::after {
+            content: "";
+
+            position: absolute;
+
+            width: 70px;
+            height: 45px;
+
+            left: 25%;
+            bottom: -38px;
+
+            border:
+                2px dashed
+                #cbd2dc;
+
+            border-radius: 50%;
+
+            background: #eef1f5;
+        }
+
+        .map-placeholder h2 {
+            margin-top: 50px;
+
+            color: #25334a;
+
+            font-size: 20px;
+        }
+
+        .map-placeholder p {
+            max-width: 480px;
+
+            margin: 7px auto 0;
+
+            color: #7a8596;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           CONTROL SIDEBAR
+           ===================================================== */
+
+        .map-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .control-card {
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 1px solid #d8dde5;
+            border-radius: 12px;
+
+            box-shadow:
+                0 6px 20px rgba(7, 17, 31, 0.06);
+        }
+
+        .control-card-header {
+            padding: 17px 18px;
+
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .control-card-header span {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #3679b9;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .control-card-header h2 {
+            font-size: 17px;
+            letter-spacing: -0.3px;
+        }
+
+        .control-card-body {
+            padding: 18px;
+        }
+
+
+        /* =====================================================
+           SELECTED STATE
+           ===================================================== */
+
+        .selected-state {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 13px;
+
+            border: 1px solid #dfe4eb;
+            border-radius: 8px;
+
+            background: #f7f8fa;
+        }
+
+        .selected-state-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 7px;
+
+            background: #e3e7ed;
+
+            color: #667085;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .selected-state strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+        .selected-state span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: #7a8596;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           PARTY BUTTONS
+           ===================================================== */
+
+        .control-label {
+            display: block;
+
+            margin: 18px 0 8px;
+
+            color: #667085;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .party-buttons {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 7px;
+        }
+
+        .party-button {
+            min-height: 42px;
+
+            border: 1px solid #d8dde5;
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            color: #596579;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .party-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .party-button.democrat {
+            border-color: rgba(3, 117, 201, 0.35);
+            color: #0375c9;
+        }
+
+        .party-button.republican {
+            border-color: rgba(201, 6, 42, 0.35);
+            color: #c9062a;
+        }
+
+        .party-button.other {
+            border-color: rgba(140, 82, 199, 0.35);
+            color: #7a43b1;
+        }
+
+
+        /* =====================================================
+           RATINGS
+           ===================================================== */
+
+        .rating-buttons {
+            display: grid;
+            gap: 6px;
+        }
+
+        .rating-button {
+            width: 100%;
+            min-height: 37px;
+
+            padding: 0 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border: 1px solid #d8dde5;
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: #4d596b;
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .rating-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #a8b0bc;
+        }
+
+
+        /* =====================================================
+           MAP ACTIONS
+           ===================================================== */
+
+        .map-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .map-action-button {
+            min-height: 41px;
+
+            border: 1px solid #d8dde5;
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            color: #4f5b6d;
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .map-action-button.primary {
+            border-color: #20314a;
+
+            background: #20314a;
+
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           LEGEND
+           ===================================================== */
+
+        .legend-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 8px 0;
+
+            color: #596579;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .legend-row + .legend-row {
+            border-top: 1px solid #edf0f3;
+        }
+
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+
+            border-radius: 4px;
+        }
+
+        .legend-swatch.democrat {
+            background: #0375c9;
+        }
+
+        .legend-swatch.republican {
+            background: #c9062a;
+        }
+
+        .legend-swatch.tossup {
+            background: #aab2bd;
+        }
+
+        .legend-swatch.other {
+            background: #8c52c7;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+
+                <img
+                    src="assets/images/electscope-logo.png"
+                    alt="ElectScope - Elections in Focus"
+                    class="site-logo"
+                >
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="maps.html">Maps</a>
+
+                <a href="polls.html">Polls</a>
+
+                <a href="predictions.html">Predictions</a>
+
+                <a href="results.html">Results</a>
+
+            </div>
+
+
+            <div class="nav-account">
+
+                <a href="#" class="sign-in-button">
+                    Sign In
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAPS PAGE
+         ===================================================== -->
+
+    <main class="maps-page">
+
+
+        <!-- =================================================
+             MAP TOOLBAR
+             ================================================= -->
+
+        <section class="maps-toolbar">
+
+            <div class="maps-toolbar-inner">
+
+                <div class="maps-title-group">
+
+                    <h1 class="maps-page-title">
+                        Election Maps
+                    </h1>
+
+
+                    <div class="election-type-tabs">
+
+                        <button
+                            class="election-type-button active"
+                            type="button"
+                        >
+                            President
+                        </button>
+
+                        <button
+                            class="election-type-button"
+                            type="button"
+                        >
+                            Senate
+                        </button>
+
+                        <button
+                            class="election-type-button"
+                            type="button"
+                        >
+                            House
+                        </button>
+
+                        <button
+                            class="election-type-button"
+                            type="button"
+                        >
+                            Governors
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="year-control">
+
+                    <label for="election-year">
+                        Year
+                    </label>
+
+                    <select id="election-year">
+
+                        <option>
+                            2026
+                        </option>
+
+                        <option>
+                            2024
+                        </option>
+
+                        <option>
+                            2022
+                        </option>
+
+                        <option>
+                            2020
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             WORKSPACE
+             ================================================= -->
+
+        <section class="map-workspace">
+
+
+            <!-- =============================================
+                 MAP AREA
+                 ============================================= -->
+
+            <div class="map-panel">
+
+
+                <div class="map-panel-header">
+
+                    <div class="map-panel-title">
+
+                        <span>
+                            Election Map
+                        </span>
+
+                        <h1>
+                            2026 Presidential Map
+                        </h1>
+
+                    </div>
+
+
+                    <div class="map-mode">
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            Rating
+                        </button>
+
+                        <button type="button">
+                            Vote Share
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     SUMMARY
+                     Demo numbers only
+                     ========================================= -->
+
+                <div class="map-summary">
+
+                    <div class="summary-party">
+
+                        <span
+                            class="summary-color democrat"
+                        ></span>
+
+                        <div>
+
+                            <span class="summary-label">
+                                Democrat
+                            </span>
+
+                            <strong>
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-majority">
+
+                        <strong>
+                            270
+                        </strong>
+
+                        <span>
+                            To Win
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="
+                            summary-party
+                            republican-summary
+                        "
+                    >
+
+                        <div>
+
+                            <span class="summary-label">
+                                Republican
+                            </span>
+
+                            <strong>
+                                0
+                            </strong>
+
+                        </div>
+
+                        <span
+                            class="summary-color republican"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     MAP CANVAS
+                     ========================================= -->
+
+                <div class="map-canvas">
+
+                    <div class="map-placeholder">
+
+                        <div
+                            class="placeholder-map-shape"
+                        ></div>
+
+                        <h2>
+                            Interactive U.S. Map
+                        </h2>
+
+                        <p>
+                            The final state-level SVG map will
+                            live here. States will be clickable
+                            and update automatically when you
+                            assign a party and rating.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 SIDEBAR
+                 ============================================= -->
+
+            <aside class="map-sidebar">
+
+
+                <!-- SELECT RACE -->
+
+                <section class="control-card">
+
+                    <div class="control-card-header">
+
+                        <span>
+                            Map Editor
+                        </span>
+
+                        <h2>
+                            Selected Race
+                        </h2>
+
+                    </div>
+
+
+                    <div class="control-card-body">
+
+                        <div class="selected-state">
+
+                            <div class="selected-state-icon">
+                                --
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Select a state
+                                </strong>
+
+                                <span>
+                                    Click a state on the map
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="control-label">
+                            Party
+                        </span>
+
+
+                        <div class="party-buttons">
+
+                            <button
+                                type="button"
+                                class="
+                                    party-button
+                                    democrat
+                                "
+                            >
+                                DEM
+                            </button>
+
+                            <button
+                                type="button"
+                                class="
+                                    party-button
+                                    republican
+                                "
+                            >
+                                GOP
+                            </button>
+
+                            <button
+                                type="button"
+                                class="
+                                    party-button
+                                    other
+                                "
+                            >
+                                OTHER
+                            </button>
+
+                        </div>
+
+
+                        <span class="control-label">
+                            Rating
+                        </span>
+
+
+                        <div class="rating-buttons">
+
+                            <button
+                                type="button"
+                                class="rating-button"
+                            >
+                                Tossup
+
+                                <span
+                                    class="rating-dot"
+                                ></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="rating-button"
+                            >
+                                Tilt
+
+                                <span
+                                    class="rating-dot"
+                                ></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="rating-button"
+                            >
+                                Lean
+
+                                <span
+                                    class="rating-dot"
+                                ></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="rating-button"
+                            >
+                                Likely
+
+                                <span
+                                    class="rating-dot"
+                                ></span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="rating-button"
+                            >
+                                Solid
+
+                                <span
+                                    class="rating-dot"
+                                ></span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MAP ACTIONS -->
+
+                <section class="control-card">
+
+                    <div class="control-card-header">
+
+                        <span>
+                            Workspace
+                        </span>
+
+                        <h2>
+                            Map Actions
+                        </h2>
+
+                    </div>
+
+
+                    <div class="control-card-body">
+
+                        <div class="map-actions">
+
+                            <button
+                                type="button"
+                                class="
+                                    map-action-button
+                                    primary
+                                "
+                            >
+                                Save Map
+                            </button>
+
+                            <button
+                                type="button"
+                                class="map-action-button"
+                            >
+                                Share
+                            </button>
+
+                            <button
+                                type="button"
+                                class="map-action-button"
+                            >
+                                Reset
+                            </button>
+
+                            <button
+                                type="button"
+                                class="map-action-button"
+                            >
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- LEGEND -->
+
+                <section class="control-card">
+
+                    <div class="control-card-header">
+
+                        <span>
+                            Map Key
+                        </span>
+
+                        <h2>
+                            Legend
+                        </h2>
+
+                    </div>
+
+
+                    <div class="control-card-body">
+
+                        <div class="legend-row">
+
+                            <span>
+                                Democratic
+                            </span>
+
+                            <span
+                                class="
+                                    legend-swatch
+                                    democrat
+                                "
+                            ></span>
+
+                        </div>
+
+
+                        <div class="legend-row">
+
+                            <span>
+                                Republican
+                            </span>
+
+                            <span
+                                class="
+                                    legend-swatch
+                                    republican
+                                "
+                            ></span>
+
+                        </div>
+
+
+                        <div class="legend-row">
+
+                            <span>
+                                Tossup
+                            </span>
+
+                            <span
+                                class="
+                                    legend-swatch
+                                    tossup
+                                "
+                            ></span>
+
+                        </div>
+
+
+                        <div class="legend-row">
+
+                            <span>
+                                Other / Independent
+                            </span>
+
+                            <span
+                                class="
+                                    legend-swatch
+                                    other
+                                "
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/maps.js"></script>
+
+</body>
+
+</html>
