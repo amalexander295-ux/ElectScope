@@ -359,110 +359,48 @@
 
             min-height: 610px;
 
-            padding: 30px;
+            padding: 24px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
+            overflow: hidden;
+
             background:
                 radial-gradient(
                     circle at center,
-                    rgba(54, 121, 185, 0.05),
-                    transparent 48%
+                    rgba(54, 121, 185, 0.04),
+                    transparent 52%
                 ),
                 #ffffff;
         }
 
-        .map-placeholder {
-            width: 78%;
-            max-width: 720px;
 
-            text-align: center;
+        /* =====================================================
+           REAL SVG ELECTION MAP
+           ===================================================== */
+
+        .election-map-container {
+            width: 100%;
+            min-height: 560px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
         }
 
-        .placeholder-map-shape {
-            position: relative;
+        .election-map {
+            display: block;
 
             width: 100%;
-            height: 310px;
+            height: 560px;
 
-            margin-bottom: 24px;
+            border: 0;
 
-            border:
-                2px dashed
-                #cbd2dc;
-
-            border-radius:
-                42% 36% 31% 38% /
-                34% 42% 35% 40%;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #f3f5f8,
-                    #e9edf2
-                );
-        }
-
-        .placeholder-map-shape::before {
-            content: "";
-
-            position: absolute;
-
-            width: 110px;
-            height: 70px;
-
-            left: 8%;
-            bottom: -42px;
-
-            border:
-                2px dashed
-                #cbd2dc;
-
-            border-radius: 40%;
-
-            background: #eef1f5;
-        }
-
-        .placeholder-map-shape::after {
-            content: "";
-
-            position: absolute;
-
-            width: 70px;
-            height: 45px;
-
-            left: 25%;
-            bottom: -38px;
-
-            border:
-                2px dashed
-                #cbd2dc;
-
-            border-radius: 50%;
-
-            background: #eef1f5;
-        }
-
-        .map-placeholder h2 {
-            margin-top: 50px;
-
-            color: #25334a;
-
-            font-size: 20px;
-        }
-
-        .map-placeholder p {
-            max-width: 480px;
-
-            margin: 7px auto 0;
-
-            color: #7a8596;
-
-            font-size: 13px;
-
-            line-height: 1.6;
+            object-fit: contain;
         }
 
 
@@ -573,7 +511,7 @@
 
 
         /* =====================================================
-           PARTY BUTTONS
+           CONTROL LABELS
            ===================================================== */
 
         .control-label {
@@ -589,6 +527,11 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
+
+        /* =====================================================
+           PARTY BUTTONS
+           ===================================================== */
 
         .party-buttons {
             display: grid;
@@ -617,7 +560,9 @@
 
             transition:
                 transform 0.15s ease,
-                border-color 0.15s ease;
+                border-color 0.15s ease,
+                background 0.15s ease,
+                color 0.15s ease;
         }
 
         .party-button:hover {
@@ -671,6 +616,15 @@
             font-weight: 800;
 
             cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .rating-button:hover {
+            background: #f7f8fa;
+            border-color: #bfc7d2;
         }
 
         .rating-dot {
@@ -708,6 +662,16 @@
             font-weight: 900;
 
             cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .map-action-button:hover {
+            transform: translateY(-1px);
+            background: #f7f8fa;
         }
 
         .map-action-button.primary {
@@ -716,6 +680,10 @@
             background: #20314a;
 
             color: #ffffff;
+        }
+
+        .map-action-button.primary:hover {
+            background: #142238;
         }
 
 
@@ -842,6 +810,7 @@
                         <button
                             class="election-type-button active"
                             type="button"
+                            data-election="president"
                         >
                             President
                         </button>
@@ -849,6 +818,7 @@
                         <button
                             class="election-type-button"
                             type="button"
+                            data-election="senate"
                         >
                             Senate
                         </button>
@@ -856,6 +826,7 @@
                         <button
                             class="election-type-button"
                             type="button"
+                            data-election="house"
                         >
                             House
                         </button>
@@ -863,6 +834,7 @@
                         <button
                             class="election-type-button"
                             type="button"
+                            data-election="governors"
                         >
                             Governors
                         </button>
@@ -880,19 +852,23 @@
 
                     <select id="election-year">
 
-                        <option>
+                        <option value="2028" selected>
+                            2028
+                        </option>
+
+                        <option value="2026">
                             2026
                         </option>
 
-                        <option>
+                        <option value="2024">
                             2024
                         </option>
 
-                        <option>
+                        <option value="2022">
                             2022
                         </option>
 
-                        <option>
+                        <option value="2020">
                             2020
                         </option>
 
@@ -927,8 +903,8 @@
                             Election Map
                         </span>
 
-                        <h1>
-                            2026 Presidential Map
+                        <h1 id="map-title">
+                            2028 Presidential Map
                         </h1>
 
                     </div>
@@ -939,11 +915,15 @@
                         <button
                             type="button"
                             class="active"
+                            data-mode="rating"
                         >
                             Rating
                         </button>
 
-                        <button type="button">
+                        <button
+                            type="button"
+                            data-mode="vote-share"
+                        >
                             Vote Share
                         </button>
 
@@ -954,7 +934,6 @@
 
                 <!-- =========================================
                      SUMMARY
-                     Demo numbers only
                      ========================================= -->
 
                 <div class="map-summary">
@@ -971,7 +950,7 @@
                                 Democrat
                             </span>
 
-                            <strong>
+                            <strong id="democrat-total">
                                 0
                             </strong>
 
@@ -1006,7 +985,7 @@
                                 Republican
                             </span>
 
-                            <strong>
+                            <strong id="republican-total">
                                 0
                             </strong>
 
@@ -1022,27 +1001,22 @@
 
 
                 <!-- =========================================
-                     MAP CANVAS
+                     REAL SVG MAP
                      ========================================= -->
 
                 <div class="map-canvas">
 
-                    <div class="map-placeholder">
+                    <div class="election-map-container">
 
-                        <div
-                            class="placeholder-map-shape"
-                        ></div>
-
-                        <h2>
-                            Interactive U.S. Map
-                        </h2>
-
-                        <p>
-                            The final state-level SVG map will
-                            live here. States will be clickable
-                            and update automatically when you
-                            assign a party and rating.
-                        </p>
+                        <object
+                            id="election-map"
+                            class="election-map"
+                            data="maps/president.svg"
+                            type="image/svg+xml"
+                            aria-label="United States presidential election map"
+                        >
+                            Your browser could not load the election map.
+                        </object>
 
                     </div>
 
@@ -1058,7 +1032,9 @@
             <aside class="map-sidebar">
 
 
-                <!-- SELECT RACE -->
+                <!-- =========================================
+                     SELECTED RACE
+                     ========================================= -->
 
                 <section class="control-card">
 
@@ -1079,17 +1055,20 @@
 
                         <div class="selected-state">
 
-                            <div class="selected-state-icon">
+                            <div
+                                class="selected-state-icon"
+                                id="selected-state-icon"
+                            >
                                 --
                             </div>
 
                             <div>
 
-                                <strong>
+                                <strong id="selected-state-name">
                                     Select a state
                                 </strong>
 
-                                <span>
+                                <span id="selected-state-description">
                                     Click a state on the map
                                 </span>
 
@@ -1111,6 +1090,7 @@
                                     party-button
                                     democrat
                                 "
+                                data-party="democrat"
                             >
                                 DEM
                             </button>
@@ -1121,6 +1101,7 @@
                                     party-button
                                     republican
                                 "
+                                data-party="republican"
                             >
                                 GOP
                             </button>
@@ -1131,6 +1112,7 @@
                                     party-button
                                     other
                                 "
+                                data-party="other"
                             >
                                 OTHER
                             </button>
@@ -1148,6 +1130,7 @@
                             <button
                                 type="button"
                                 class="rating-button"
+                                data-rating="tossup"
                             >
                                 Tossup
 
@@ -1161,6 +1144,7 @@
                             <button
                                 type="button"
                                 class="rating-button"
+                                data-rating="tilt"
                             >
                                 Tilt
 
@@ -1174,6 +1158,7 @@
                             <button
                                 type="button"
                                 class="rating-button"
+                                data-rating="lean"
                             >
                                 Lean
 
@@ -1187,6 +1172,7 @@
                             <button
                                 type="button"
                                 class="rating-button"
+                                data-rating="likely"
                             >
                                 Likely
 
@@ -1200,6 +1186,7 @@
                             <button
                                 type="button"
                                 class="rating-button"
+                                data-rating="solid"
                             >
                                 Solid
 
@@ -1216,7 +1203,9 @@
                 </section>
 
 
-                <!-- MAP ACTIONS -->
+                <!-- =========================================
+                     MAP ACTIONS
+                     ========================================= -->
 
                 <section class="control-card">
 
@@ -1275,7 +1264,9 @@
                 </section>
 
 
-                <!-- LEGEND -->
+                <!-- =========================================
+                     LEGEND
+                     ========================================= -->
 
                 <section class="control-card">
 
@@ -1367,6 +1358,10 @@
 
     </main>
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
     <script src="js/main.js"></script>
     <script src="js/maps.js"></script>
