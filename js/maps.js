@@ -1,9 +1,9 @@
 /* =========================================================
    ElectScope Maps
-   Presidential map engine
+   Presidential Map Engine
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        PAGE ELEMENTS
@@ -18,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const mapTitle =
         document.getElementById("map-title");
 
+    const majorityNumber =
+        document.getElementById("majority-number");
+
+    const democratTotal =
+        document.getElementById("democrat-total");
+
+    const republicanTotal =
+        document.getElementById("republican-total");
+
     const selectedName =
         document.getElementById("selected-state-name");
 
@@ -27,24 +36,232 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedIcon =
         document.getElementById("selected-state-icon");
 
-    const democratTotal =
-        document.getElementById("democrat-total");
-
-    const republicanTotal =
-        document.getElementById("republican-total");
-
-    const majorityNumber =
-        document.querySelector(".summary-majority strong");
-
     const partyButtons =
         document.querySelectorAll("[data-party]");
 
     const ratingButtons =
         document.querySelectorAll("[data-rating]");
 
-    if (!mapObject || !yearSelect) {
+
+    if (!mapObject || !yearSelect || !mapTitle) {
+
+        console.error(
+            "ElectScope: required map elements are missing."
+        );
+
         return;
     }
+
+
+    /* =====================================================
+       SUPPORTED PRESIDENTIAL YEARS
+       ===================================================== */
+
+    const PRESIDENTIAL_YEARS = [
+        2028,
+        2024,
+        2020
+    ];
+
+
+    /* =====================================================
+       PRESIDENTIAL ELECTORAL VOTES
+       ===================================================== */
+
+    const PRESIDENTIAL_EV = {
+
+        2020: {
+            AL: 9,
+            AK: 3,
+            AZ: 11,
+            AR: 6,
+            CA: 55,
+            CO: 9,
+            CT: 7,
+            DE: 3,
+            DC: 3,
+            FL: 29,
+            GA: 16,
+            HI: 4,
+            ID: 4,
+            IL: 20,
+            IN: 11,
+            IA: 6,
+            KS: 6,
+            KY: 8,
+            LA: 8,
+
+            "ME-AL": 2,
+            "ME-01": 1,
+            "ME-02": 1,
+
+            MD: 10,
+            MA: 11,
+            MI: 16,
+            MN: 10,
+            MS: 6,
+            MO: 10,
+            MT: 3,
+
+            "NE-AL": 2,
+            "NE-01": 1,
+            "NE-02": 1,
+            "NE-03": 1,
+
+            NV: 6,
+            NH: 4,
+            NJ: 14,
+            NM: 5,
+            NY: 29,
+            NC: 15,
+            ND: 3,
+            OH: 18,
+            OK: 7,
+            OR: 7,
+            PA: 20,
+            RI: 4,
+            SC: 9,
+            SD: 3,
+            TN: 11,
+            TX: 38,
+            UT: 6,
+            VT: 3,
+            VA: 13,
+            WA: 12,
+            WV: 5,
+            WI: 10,
+            WY: 3
+        },
+
+
+        2024: {
+            AL: 9,
+            AK: 3,
+            AZ: 11,
+            AR: 6,
+            CA: 54,
+            CO: 10,
+            CT: 7,
+            DE: 3,
+            DC: 3,
+            FL: 30,
+            GA: 16,
+            HI: 4,
+            ID: 4,
+            IL: 19,
+            IN: 11,
+            IA: 6,
+            KS: 6,
+            KY: 8,
+            LA: 8,
+
+            "ME-AL": 2,
+            "ME-01": 1,
+            "ME-02": 1,
+
+            MD: 10,
+            MA: 11,
+            MI: 15,
+            MN: 10,
+            MS: 6,
+            MO: 10,
+            MT: 4,
+
+            "NE-AL": 2,
+            "NE-01": 1,
+            "NE-02": 1,
+            "NE-03": 1,
+
+            NV: 6,
+            NH: 4,
+            NJ: 14,
+            NM: 5,
+            NY: 28,
+            NC: 16,
+            ND: 3,
+            OH: 17,
+            OK: 7,
+            OR: 8,
+            PA: 19,
+            RI: 4,
+            SC: 9,
+            SD: 3,
+            TN: 11,
+            TX: 40,
+            UT: 6,
+            VT: 3,
+            VA: 13,
+            WA: 12,
+            WV: 4,
+            WI: 10,
+            WY: 3
+        },
+
+
+        2028: {
+            AL: 9,
+            AK: 3,
+            AZ: 11,
+            AR: 6,
+            CA: 54,
+            CO: 10,
+            CT: 7,
+            DE: 3,
+            DC: 3,
+            FL: 30,
+            GA: 16,
+            HI: 4,
+            ID: 4,
+            IL: 19,
+            IN: 11,
+            IA: 6,
+            KS: 6,
+            KY: 8,
+            LA: 8,
+
+            "ME-AL": 2,
+            "ME-01": 1,
+            "ME-02": 1,
+
+            MD: 10,
+            MA: 11,
+            MI: 15,
+            MN: 10,
+            MS: 6,
+            MO: 10,
+            MT: 4,
+
+            "NE-AL": 2,
+            "NE-01": 1,
+            "NE-02": 1,
+            "NE-03": 1,
+
+            NV: 6,
+            NH: 4,
+            NJ: 14,
+            NM: 5,
+            NY: 28,
+            NC: 16,
+            ND: 3,
+            OH: 17,
+            OK: 7,
+            OR: 8,
+            PA: 19,
+            RI: 4,
+            SC: 9,
+            SD: 3,
+            TN: 11,
+            TX: 40,
+            UT: 6,
+            VT: 3,
+            VA: 13,
+            WA: 12,
+            WV: 4,
+            WI: 10,
+            WY: 3
+        }
+
+    };
 
 
     /* =====================================================
@@ -53,24 +270,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let svgDocument = null;
 
+    let currentYear = 2028;
+
+    let currentElectoralVotes =
+        PRESIDENTIAL_EV[currentYear];
+
     let selectedRegion = null;
 
     let selectedParty = null;
-
-    let currentYear =
-        Number(yearSelect.value);
-
-    let currentElectionData = null;
-
-    let currentElectoralVotes = {};
-
-    let currentMajority = 270;
 
     const assignments = {};
 
 
     /* =====================================================
-       ELECTSCOPE COLORS
+       COLORS
        ===================================================== */
 
     const colors = {
@@ -105,6 +318,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
+       BUILD PRESIDENTIAL YEAR DROPDOWN
+       ===================================================== */
+
+    function buildYearDropdown() {
+
+        yearSelect.innerHTML = "";
+
+        PRESIDENTIAL_YEARS.forEach(function (year) {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                String(year);
+
+            option.textContent =
+                String(year);
+
+            if (year === currentYear) {
+
+                option.selected = true;
+
+            }
+
+            yearSelect.appendChild(option);
+
+        });
+
+    }
+
+
+    /* =====================================================
        REGION HELPERS
        ===================================================== */
 
@@ -117,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return region
             .trim()
             .toUpperCase();
+
     }
 
 
@@ -129,10 +375,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const normalized =
             normalizeRegion(region);
 
-        const allRegions =
+        const elements =
             svgDocument.querySelectorAll("[region]");
 
-        for (const element of allRegions) {
+        for (const element of elements) {
 
             const elementRegion =
                 normalizeRegion(
@@ -140,12 +386,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             if (elementRegion === normalized) {
+
                 return element;
+
             }
 
         }
 
         return null;
+
     }
 
 
@@ -155,7 +404,9 @@ document.addEventListener("DOMContentLoaded", () => {
             getRegionElement(region);
 
         if (!element) {
+
             return normalizeRegion(region);
+
         }
 
         return (
@@ -195,7 +446,9 @@ document.addEventListener("DOMContentLoaded", () => {
             tag === "polygon" ||
             tag === "rect"
         ) {
+
             return [element];
+
         }
 
         return Array.from(
@@ -210,7 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function paintRegion(region, fill) {
 
         getRegionShapes(region)
-            .forEach(shape => {
+            .forEach(function (shape) {
 
                 shape.style.fill = fill;
 
@@ -220,69 +473,114 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       YEAR + ELECTION DATA
+       ELECTORAL-VOTE TOTAL
        ===================================================== */
 
-    function loadElectionYear(year) {
+    function getTotalElectoralVotes() {
 
-        currentYear =
-            Number(year);
+        return Object.values(
+            currentElectoralVotes
+        ).reduce(
+            function (total, value) {
 
-        currentElectionData =
-            getPresidentialElectionData(
-                currentYear
-            );
+                return total + Number(value);
 
-        if (!currentElectionData) {
-
-            console.warn(
-                `No presidential election data for ${currentYear}.`
-            );
-
-            return false;
-
-        }
-
-        currentElectoralVotes = {
-            ...currentElectionData.electoralVotes
-        };
-
-        currentMajority =
-            calculateElectoralMajority(
-                currentElectionData
-                    .totalElectoralVotes
-            );
-
-        updateYearInterface();
-
-        return true;
+            },
+            0
+        );
 
     }
 
 
-    function updateYearInterface() {
+    function getMajorityNeeded() {
 
-        if (mapTitle) {
+        const total =
+            getTotalElectoralVotes();
 
-            mapTitle.textContent =
-                `${currentYear} Presidential Map`;
-
-        }
-
-        if (majorityNumber) {
-
-            majorityNumber.textContent =
-                currentMajority;
-
-        }
-
-        updateElectoralVoteLabels();
+        return Math.floor(total / 2) + 1;
 
     }
 
 
     /* =====================================================
-       ELECTORAL VOTE LABELS
+       CHANGE ELECTION YEAR
+       ===================================================== */
+
+    function changeElectionYear(year) {
+
+        const numericYear =
+            Number(year);
+
+        if (!PRESIDENTIAL_EV[numericYear]) {
+
+            console.error(
+                "ElectScope: unsupported presidential year:",
+                numericYear
+            );
+
+            return;
+
+        }
+
+        currentYear =
+            numericYear;
+
+        currentElectoralVotes =
+            PRESIDENTIAL_EV[currentYear];
+
+
+        /* Update heading immediately */
+
+        mapTitle.textContent =
+            currentYear +
+            " Presidential Map";
+
+
+        /* Update majority */
+
+        if (majorityNumber) {
+
+            majorityNumber.textContent =
+                getMajorityNeeded();
+
+        }
+
+
+        /* Clear ratings from previous year */
+
+        clearAssignments();
+
+
+        /* Update SVG numbers */
+
+        updateElectoralVoteLabels();
+
+
+        /* Recalculate totals */
+
+        updateTotals();
+
+    }
+
+
+    /* =====================================================
+       YEAR CHANGE EVENT
+       ===================================================== */
+
+    yearSelect.addEventListener(
+        "change",
+        function () {
+
+            changeElectionYear(
+                yearSelect.value
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       UPDATE SVG EV LABELS
        ===================================================== */
 
     function updateElectoralVoteLabels() {
@@ -291,37 +589,40 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        svgDocument
-            .querySelectorAll("[for-region]")
-            .forEach(label => {
+        const labels =
+            svgDocument.querySelectorAll(
+                "[for-region]"
+            );
 
-                const region =
-                    normalizeRegion(
-                        label.getAttribute(
-                            "for-region"
-                        )
-                    );
+        labels.forEach(function (label) {
 
-                const valueText =
-                    label.querySelector(
-                        '[map-type="value-text"]'
-                    );
+            const region =
+                normalizeRegion(
+                    label.getAttribute(
+                        "for-region"
+                    )
+                );
 
-                if (!valueText) {
-                    return;
-                }
+            const valueText =
+                label.querySelector(
+                    '[map-type="value-text"]'
+                );
 
-                const value =
-                    getRegionValue(region);
+            if (!valueText) {
+                return;
+            }
 
-                if (value > 0) {
+            const value =
+                getRegionValue(region);
 
-                    valueText.textContent =
-                        value;
+            if (value > 0) {
 
-                }
+                valueText.textContent =
+                    value;
 
-            });
+            }
+
+        });
 
     }
 
@@ -341,7 +642,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "[region], [for-region]"
             );
 
-        clickable.forEach(element => {
+        clickable.forEach(function (element) {
 
             const rawRegion =
                 element.getAttribute("region") ||
@@ -356,7 +657,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 !region ||
                 !getRegionElement(region)
             ) {
+
                 return;
+
             }
 
             element.style.cursor =
@@ -364,7 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             element.addEventListener(
                 "click",
-                event => {
+                function (event) {
 
                     event.stopPropagation();
 
@@ -378,6 +681,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    /* =====================================================
+       SELECT REGION
+       ===================================================== */
+
     function selectRegion(region) {
 
         selectedRegion =
@@ -389,6 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const value =
             getRegionValue(selectedRegion);
 
+
         if (selectedName) {
 
             selectedName.textContent =
@@ -396,14 +704,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
         if (selectedDescription) {
 
             selectedDescription.textContent =
-                `${value} electoral vote${
-                    value === 1 ? "" : "s"
-                }`;
+                value +
+                " electoral vote" +
+                (value === 1 ? "" : "s");
 
         }
+
 
         if (selectedIcon) {
 
@@ -412,34 +722,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
         const existing =
             assignments[selectedRegion];
 
-        partyButtons.forEach(button => {
 
-            button.classList.toggle(
-                "active",
-                Boolean(
-                    existing &&
-                    button.dataset.party ===
-                    existing.party
-                )
-            );
+        partyButtons.forEach(
+            function (button) {
 
-        });
+                button.classList.toggle(
+                    "active",
+                    Boolean(
+                        existing &&
+                        button.dataset.party ===
+                        existing.party
+                    )
+                );
 
-        ratingButtons.forEach(button => {
+            }
+        );
 
-            button.classList.toggle(
-                "active",
-                Boolean(
-                    existing &&
-                    button.dataset.rating ===
-                    existing.rating
-                )
-            );
 
-        });
+        ratingButtons.forEach(
+            function (button) {
+
+                button.classList.toggle(
+                    "active",
+                    Boolean(
+                        existing &&
+                        button.dataset.rating ===
+                        existing.rating
+                    )
+                );
+
+            }
+        );
+
 
         selectedParty =
             existing
@@ -450,7 +768,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       PARTY + RATING ASSIGNMENTS
+       ASSIGN REGION
        ===================================================== */
 
     function assignRegion(rating) {
@@ -459,18 +777,24 @@ document.addEventListener("DOMContentLoaded", () => {
             !selectedRegion ||
             !selectedParty
         ) {
+
             return;
+
         }
 
         assignments[selectedRegion] = {
+
             party: selectedParty,
             rating: rating
+
         };
+
 
         paintRegion(
             selectedRegion,
             colors[selectedParty][rating]
         );
+
 
         updateTotals();
 
@@ -480,7 +804,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       ELECTORAL VOTE TOTALS
+       UPDATE PARTY TOTALS
        ===================================================== */
 
     function updateTotals() {
@@ -489,33 +813,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let republican = 0;
 
+
         Object.entries(assignments)
-            .forEach(
-                ([region, assignment]) => {
+            .forEach(function (entry) {
 
-                    const value =
-                        getRegionValue(region);
+                const region =
+                    entry[0];
 
-                    if (
-                        assignment.party ===
-                        "democrat"
-                    ) {
+                const assignment =
+                    entry[1];
 
-                        democrat += value;
+                const value =
+                    getRegionValue(region);
 
-                    }
 
-                    if (
-                        assignment.party ===
-                        "republican"
-                    ) {
+                if (
+                    assignment.party ===
+                    "democrat"
+                ) {
 
-                        republican += value;
-
-                    }
+                    democrat += value;
 
                 }
-            );
+
+
+                if (
+                    assignment.party ===
+                    "republican"
+                ) {
+
+                    republican += value;
+
+                }
+
+            });
+
 
         if (democratTotal) {
 
@@ -523,6 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 democrat;
 
         }
+
 
         if (republicanTotal) {
 
@@ -535,13 +868,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CLEAR CURRENT MAP
+       CLEAR MAP
        ===================================================== */
 
     function clearAssignments() {
 
         Object.keys(assignments)
-            .forEach(region => {
+            .forEach(function (region) {
 
                 paintRegion(
                     region,
@@ -550,16 +883,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             });
 
+
         Object.keys(assignments)
-            .forEach(region => {
+            .forEach(function (region) {
 
                 delete assignments[region];
 
             });
 
+
         selectedRegion = null;
 
         selectedParty = null;
+
 
         if (selectedName) {
 
@@ -568,12 +904,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
         if (selectedDescription) {
 
             selectedDescription.textContent =
                 "Click a state on the map";
 
         }
+
 
         if (selectedIcon) {
 
@@ -582,21 +920,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        partyButtons.forEach(button => {
 
-            button.classList.remove(
-                "active"
-            );
+        partyButtons.forEach(
+            function (button) {
 
-        });
+                button.classList.remove(
+                    "active"
+                );
 
-        ratingButtons.forEach(button => {
+            }
+        );
 
-            button.classList.remove(
-                "active"
-            );
 
-        });
+        ratingButtons.forEach(
+            function (button) {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
 
         updateTotals();
 
@@ -604,131 +949,98 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       YEAR DROPDOWN
+       PARTY BUTTONS
        ===================================================== */
 
-    yearSelect.addEventListener(
-        "change",
-        () => {
+    partyButtons.forEach(
+        function (button) {
 
-            const requestedYear =
-                Number(yearSelect.value);
+            button.addEventListener(
+                "click",
+                function () {
 
-            const election =
-                getPresidentialElectionData(
-                    requestedYear
-                );
+                    if (!selectedRegion) {
+                        return;
+                    }
 
-            if (!election) {
 
-                /*
-                 Midterm years such as 2026 do not
-                 have a regular presidential election.
-                 For now, return to the previous
-                 presidential year instead of loading
-                 fake presidential data.
-                */
+                    selectedParty =
+                        button.dataset.party;
 
-                yearSelect.value =
-                    String(currentYear);
 
-                return;
+                    partyButtons.forEach(
+                        function (item) {
 
-            }
+                            item.classList.toggle(
+                                "active",
+                                item === button
+                            );
 
-            clearAssignments();
+                        }
+                    );
 
-            loadElectionYear(
-                requestedYear
+                }
             );
-
-            updateElectoralVoteLabels();
 
         }
     );
 
 
     /* =====================================================
-       PARTY BUTTONS
-       ===================================================== */
-
-    partyButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                if (!selectedRegion) {
-                    return;
-                }
-
-                selectedParty =
-                    button.dataset.party;
-
-                partyButtons.forEach(item => {
-
-                    item.classList.toggle(
-                        "active",
-                        item === button
-                    );
-
-                });
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
        RATING BUTTONS
        ===================================================== */
 
-    ratingButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                assignRegion(
-                    button.dataset.rating
-                );
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       MAP ACTION BUTTONS
-       ===================================================== */
-
-    const actionButtons =
-        document.querySelectorAll(
-            ".map-action-button"
-        );
-
-    actionButtons.forEach(button => {
-
-        const action =
-            button.textContent
-                .trim()
-                .toLowerCase();
-
-        if (
-            action === "reset" ||
-            action === "clear"
-        ) {
+    ratingButtons.forEach(
+        function (button) {
 
             button.addEventListener(
                 "click",
-                clearAssignments
+                function () {
+
+                    assignRegion(
+                        button.dataset.rating
+                    );
+
+                }
             );
 
         }
+    );
 
-    });
+
+    /* =====================================================
+       MAP ACTIONS
+       ===================================================== */
+
+    const resetButton =
+        document.querySelector(
+            '[data-action="reset"]'
+        );
+
+    const clearButton =
+        document.querySelector(
+            '[data-action="clear"]'
+        );
+
+
+    if (resetButton) {
+
+        resetButton.addEventListener(
+            "click",
+            clearAssignments
+        );
+
+    }
+
+
+    if (clearButton) {
+
+        clearButton.addEventListener(
+            "click",
+            clearAssignments
+        );
+
+    }
 
 
     /* =====================================================
@@ -737,26 +1049,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     mapObject.addEventListener(
         "load",
-        () => {
+        function () {
 
             svgDocument =
                 mapObject.contentDocument;
 
             if (!svgDocument) {
+
+                console.error(
+                    "ElectScope: presidential SVG could not be accessed."
+                );
+
                 return;
+
             }
 
-            loadElectionYear(
-                currentYear
-            );
-
-            makeMapInteractive();
 
             updateElectoralVoteLabels();
+
+            makeMapInteractive();
 
             updateTotals();
 
         }
     );
+
+
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
+
+    buildYearDropdown();
+
+    changeElectionYear(2028);
 
 });
