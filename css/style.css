@@ -69,7 +69,6 @@
 
 * {
     box-sizing: border-box;
-
     margin: 0;
     padding: 0;
 }
@@ -101,7 +100,6 @@ body {
 
 a {
     color: inherit;
-
     text-decoration: none;
 }
 
@@ -165,19 +163,26 @@ a {
    ========================================================= */
 
 .logo {
+
     justify-self: start;
 
     display: flex;
+
     align-items: center;
 
-    height: 68px;
+    height: 52px;
 }
 
+
 .site-logo {
+
     display: block;
 
     width: auto;
-    height: 60px;
+
+    height: 40px;
+
+    max-width: 250px;
 
     object-fit: contain;
 }
@@ -258,7 +263,6 @@ a {
 
 
 .nav-links a:hover::after {
-
     width: 100%;
 }
 
@@ -268,7 +272,6 @@ a {
    ========================================================= */
 
 .nav-account {
-
     justify-self: end;
 }
 
@@ -326,7 +329,6 @@ section {
 
 
 .section-heading {
-
     margin-bottom: 34px;
 }
 
@@ -418,7 +420,6 @@ section {
 
 
 .hero-label {
-
     color: var(--scope-blue-light);
 }
 
@@ -738,7 +739,6 @@ section {
 
 .polling-content,
 .featured-map-content {
-
     flex: 1;
 }
 
@@ -854,7 +854,6 @@ section {
 
 
 .footer-brand p {
-
     font-size: 13px;
 }
 
@@ -872,7 +871,6 @@ section {
 
 
 .footer-links a:hover {
-
     color: var(--white);
 }
 
